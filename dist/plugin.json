@@ -1,0 +1,40 @@
+{
+  "name": "Sun and Moon",
+  "id": "sunandmoon",
+  "type": "datasource",
+
+  "staticRoot": ".",
+
+  "partials": {
+    "config": "public/app/plugins/datasource/sunandmoon/partials/config.html"
+  },
+
+  "metrics": true,
+  "annotations": true,
+
+  "info": {
+    "description": "Calculates position of Sun and Moon.",
+    "author": {
+      "name": "Christian Fetzer",
+      "url": "https://fetzerch.github.io"
+    },
+    "logos": {
+      "small": "src/img/logo.png",
+      "large": "src/img/logo.png"
+    },
+    "links": [
+      {"name": "GitHub", "url": "https://github.com/fetzerch/grafana-sunandmoon-datasource"},
+      {"name": "MIT License", "url": "https://github.com/fetzerch/grafana-sunandmoon-datasource/blob/master/LICENSE"}
+    ],
+    "screenshots": [
+      {"name": "Sun and Moon Position", "path": "img/screenshot.png"}
+    ],
+    "version": "0.1.0",
+    "updated": "2016-06-25"
+  },
+
+  "dependencies": {
+    "grafanaVersion": "3.x.x",
+    "plugins": [ ]
+  }
+}
