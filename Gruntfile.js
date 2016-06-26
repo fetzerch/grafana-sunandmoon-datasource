@@ -95,6 +95,22 @@ module.exports = function(grunt) {
       }
     },
 
+    jshint: {
+      source: {
+        files: {
+          src: ['src/**/*.js']
+        }
+      },
+      options: {
+        jshintrc: true,
+        reporter: require('jshint-stylish'),
+        ignores: [
+          'node_modules/*',
+          'dist/*'
+        ]
+      }
+    },
+
     mochaTest: {
       test: {
         options: {
@@ -115,6 +131,7 @@ module.exports = function(grunt) {
     'copy:node_modules_to_dist',
     'copy:pluginDef',
     'babel',
+    'jshint',
     'mochaTest'
   ]);
 };
