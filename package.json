@@ -1,20 +1,24 @@
 {
-  "name": "kentik-app",
+  "name": "grafana-sunandmoon-datasource",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "grunt test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/raintank/kentik-app-poc.git"
+    "url": "git+https://github.com/fetzerch/grafana-sunandmoon-datasource.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": {
+    "name": "Christian Fetzer",
+    "email": "fetzer.ch@gmail.com",
+    "url": "https://fetzerch.github.io"
+  },
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/raintank/kentik-app-poc/issues"
+    "url": "https://github.com/fetzerch/grafana-sunandmoon-datasource/issues"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
@@ -41,5 +45,5 @@
     "mocha": "^2.4.5",
     "suncalc": "~1.7.0"
   },
-  "homepage": "https://github.com/raintank/kentik-app-poc#readme"
+  "homepage": "https://github.com/fetzerch/grafana-sunandmoon-datasource"
 }
