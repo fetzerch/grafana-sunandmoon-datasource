@@ -30,7 +30,10 @@ module.exports = function(grunt) {
       node_modules_to_dist: {
         cwd: 'node_modules',
         expand: true,
-        src: ['suncalc/suncalc.js'],
+        src: [
+          'lodash/lodash.js',
+          'suncalc/suncalc.js'
+        ],
         dest: 'dist',
         flatten: true
       },

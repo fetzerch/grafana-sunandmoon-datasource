@@ -1,4 +1,4 @@
-import _ from "lodash";
+import _ from "./lodash";
 import SunCalc from "./suncalc";
 
 export class SunAndMoonDatasource {
@@ -58,6 +58,91 @@ export class SunAndMoonDatasource {
         values: []
       }
     };
+
+    // Configure annotations
+    this.annotations = {
+      sunrise: {
+        title: "Sunrise",
+        text:  "Top edge of the sun appears on the horizon",
+        tags:  "sun"
+      },
+      sunriseEnd: {
+        title: "Sunrise ends",
+        text:  "Bottom edge of the sun touches the horizon",
+        tags:  "sun"
+      },
+      goldenHourEnd: {
+        title: "Morning golden hour ends",
+        text:  "Soft light, best time for photography",
+        tags:  "sun"
+      },
+      solarNoon: {
+        title: "Solar noon",
+        text:  "Sun is in the highest position",
+        tags:  "sun"
+      },
+      goldenHour: {
+        title: "Evening golden hour starts",
+        text:  "Soft light, best time for photography",
+        tags:  "sun"
+      },
+      sunsetStart: {
+        title: "Sunset starts",
+        text:  "Bottom edge of the sun touches the horizon",
+        tags:  "sun"
+      },
+      sunset: {
+        title: "Sunset",
+        text:  "Sun disappears below the horizonizon, " +
+               "evening civil twilight starts",
+        tags:  "sun"
+      },
+      dusk: {
+        title: "Dusk",
+        text:  "Evening nautical twilight starts",
+        tags:  "sun"
+      },
+      nauticalDusk: {
+        title: "Nautical dusk",
+        text:  "Evening astronomical twilight starts",
+        tags:  "sun"
+      },
+      night: {
+        title: "Night starts",
+        text:  "Dark enough for astronomical observations",
+        tags:  "sun"
+      },
+      nadir: {
+        title: "Nadir",
+        text:  "Darkest moment of the night, sun is in the lowest positionon",
+        tags:  "sun"
+      },
+      nightEnd: {
+        title: "Night ends",
+        text:  "Morning astronomical twilight starts",
+        tags:  "sun"
+      },
+      nauticalDawn: {
+        title: "Nautical dawn",
+        text:  "Morning nautical twilight starts",
+        tags:  "sun"
+      },
+      dawn: {
+        title: "Dawn",
+        text:  "Morning nautical twilight ends, morning civil twilight starts",
+        tags:  "sun"
+      },
+      moonrise: {
+        title: "Moonrise",
+        text:  "Top edge of the moon appears on the horizon",
+        tags:  "moon"
+      },
+      moonset: {
+        title: "Moonset",
+        text:  "Moon disappears below the horizonizon",
+        tags:  "moon"
+      }
+    };
   }
 
   // Cache values
@@ -102,6 +187,36 @@ export class SunAndMoonDatasource {
                          "datapoints": series[metric].values});
     }
     return {"data": targetSeries};
+  }
+
+  annotationQuery(options) {
+    var from = options.range.from;
+    var to = options.range.to.add(1, "days");
+    var targets = "*";
+    if (options.annotation.query !== undefined)
+      targets = options.annotation.query.split(/\s*[\s,]\s*/);
+
+    var result = [];
+    for (let date = from; date < to; date.add(1, "days")) {
+      var sunTimes = SunCalc.getTimes(
+          date, this.position.latitude, this.position.longitude);
+      var moonTimes = SunCalc.getMoonTimes(
+          date, this.position.latitude, this.position.longitude);
+      var values = _.merge({}, sunTimes,
+          _.mapKeys(moonTimes, function(value, key) { return "moon" + key; }));
+      for (let value in values) {
+        if (targets != "*" && targets.indexOf(value) < 0)
+          continue;
+        result.push({
+          "annotation": options.annotation,
+          "title": this.annotations[value].title,
+          "text": this.annotations[value].text,
+          "time": values[value].valueOf(),
+          "tags": this.annotations[value].tags,
+        });
+      }
+    }
+    return this.q.when(result);
   }
 
   testDatasource() {
