@@ -7,13 +7,18 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
 
-    clean: ["dist"],
+    clean: ['dist'],
 
     copy: {
       src_to_dist: {
         cwd: 'src',
         expand: true,
-        src: ['**/*', '!**/*.js', '!**/*.scss', '!img/*'],
+        src: [
+          '**/*',
+          '!**/*.js',
+          '!**/*.scss',
+          '!img/*'
+        ],
         dest: 'dist'
       },
       img_to_dist: {
@@ -31,14 +36,20 @@ module.exports = function(grunt) {
       },
       pluginDef: {
         expand: true,
-        src: [ 'plugin.json', 'README.md' ],
+        src: [
+          'plugin.json',
+          'README.md'
+        ],
         dest: 'dist'
       }
     },
 
     watch: {
       rebuild_all: {
-        files: ['src/**/*', 'plugin.json'],
+        files: [
+          'src/**/*',
+          'plugin.json'
+        ],
         tasks: ['default'],
         options: {spawn: false}
       }
@@ -51,7 +62,10 @@ module.exports = function(grunt) {
       },
       dist: {
         options: {
-          plugins: ['transform-es2015-modules-systemjs', 'transform-es2015-for-of']
+          plugins: [
+            'transform-es2015-modules-systemjs',
+            'transform-es2015-for-of'
+          ]
         },
         files: [{
           cwd: 'src',
@@ -86,10 +100,21 @@ module.exports = function(grunt) {
         options: {
           reporter: 'spec'
         },
-        src: ['dist/test/spec/test-main.js', 'dist/test/spec/*_spec.js']
+        src: [
+          'dist/test/spec/test-main.js',
+          'dist/test/spec/*_spec.js'
+        ]
       }
     }
   });
 
-  grunt.registerTask('default', ['clean', 'copy:src_to_dist','copy:img_to_dist', 'copy:node_modules_to_dist', 'copy:pluginDef', 'babel', 'mochaTest']);
+  grunt.registerTask('default', [
+    'clean',
+    'copy:src_to_dist',
+    'copy:img_to_dist',
+    'copy:node_modules_to_dist',
+    'copy:pluginDef',
+    'babel',
+    'mochaTest'
+  ]);
 };
