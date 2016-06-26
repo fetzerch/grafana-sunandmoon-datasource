@@ -22,21 +22,18 @@ System.register(['./datasource', './query_ctrl'], function (_export, _context) {
         _classCallCheck(this, SunAndMoonConfigCtrl);
       });
 
-      ;
       SunAndMoonConfigCtrl.templateUrl = 'partials/config.html';
 
       _export('QueryOptionsCtrl', SunAndMoonQueryOptionsCtrl = function SunAndMoonQueryOptionsCtrl() {
         _classCallCheck(this, SunAndMoonQueryOptionsCtrl);
       });
 
-      ;
       SunAndMoonQueryOptionsCtrl.templateUrl = 'partials/query.options.html';
 
       _export('AnnotationsQueryCtrl', SunAndMoonAnnotationsQueryCtrl = function SunAndMoonAnnotationsQueryCtrl() {
         _classCallCheck(this, SunAndMoonAnnotationsQueryCtrl);
       });
 
-      ;
       SunAndMoonAnnotationsQueryCtrl.templateUrl = 'partials/annotations.editor.html';
 
       _export('Datasource', SunAndMoonDatasource);

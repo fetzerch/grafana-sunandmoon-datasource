@@ -141,9 +141,9 @@ System.register(["lodash", "./suncalc"], function (_export, _context) {
             }
 
             var targetSeries = [];
-            for (var metric in series) {
-              targetSeries.push({ 'target': series[metric].text,
-                'datapoints': series[metric].values });
+            for (var _metric in series) {
+              targetSeries.push({ "target": series[_metric].text,
+                "datapoints": series[_metric].values });
             }
             return { "data": targetSeries };
           }

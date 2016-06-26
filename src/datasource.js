@@ -19,7 +19,7 @@ export class SunAndMoonDatasource {
     this.metrics = {
       moon_illumination: {
         text: "Moon illumination",
-        calc: function (time) {
+        calc: function(time) {
                 return SunCalc.getMoonIllumination(time).fraction;
               },
         values: []
@@ -65,17 +65,17 @@ export class SunAndMoonDatasource {
     if (!this.moonPosition)
       this.moonPosition = SunCalc.getMoonPosition(
           time, this.position.latitude, this.position.longitude);
-    return this.moonPosition
+    return this.moonPosition;
   }
   cachedSunPosition(time) {
     if (!this.sunPosition)
       this.sunPosition = SunCalc.getPosition(
           time, this.position.latitude, this.position.longitude);
-    return this.sunPosition
+    return this.sunPosition;
   }
   cleanCachedPositions() {
-    this.moonPosition = null
-    this.sunPosition = null
+    this.moonPosition = null;
+    this.sunPosition = null;
   }
 
   query(options) {
@@ -84,22 +84,22 @@ export class SunAndMoonDatasource {
     var maxDataPoints = options.maxDataPoints;
     var stepInSeconds = (to - from) / maxDataPoints;
 
-    var targets = _.map(options.targets, function (i) { return i.target });
+    var targets = _.map(options.targets, function(i) { return i.target; });
 
     // Result map
     var series = _.pick(this.metrics, targets);
-    for (var idx = 0, time = from; time < to;
+    for (let idx = 0, time = from; time < to;
          idx += 1, time += Math.ceil(stepInSeconds)) {
-      for (var metric in series) {
+      for (let metric in series) {
         series[metric].values[idx] = [series[metric].calc(time), time];
       }
       this.cleanCachedPositions();
     }
 
     var targetSeries = [];
-    for (var metric in series) {
-      targetSeries.push({'target': series[metric].text,
-                         'datapoints': series[metric].values});
+    for (let metric in series) {
+      targetSeries.push({"target": series[metric].text,
+                         "datapoints": series[metric].values});
     }
     return {"data": targetSeries};
   }
@@ -108,20 +108,20 @@ export class SunAndMoonDatasource {
     var res = {};
     if (this.position.latitude < -90 || this.position.latitude > 90) {
       res = {"status": "error", title: "Error",
-             message: "Latitude not in range -+90."}
+             message: "Latitude not in range -+90."};
     } else if (this.position.longitude < -360 ||
                this.position.longitude > 360) {
       res = {"status": "error", title: "Error",
-             message: "Longitude not in range -+360."}
+             message: "Longitude not in range -+360."};
     } else {
       res = {"status": "success", title: "Success",
-             message: "Datasource added successfully."}
+             message: "Datasource added successfully."};
     }
     return this.q.when(res);
   }
 
   metricFindQuery() {
-    var targets = _.keys(this.metrics)
+    var targets = _.keys(this.metrics);
     return this.q.when(targets.map(function (i) { return {text: i}; }));
   }
 }
