@@ -1,0 +1,6 @@
+image: node:4.2.6
+
+all_tests:
+    script:
+        - npm install
+        - grunt test
