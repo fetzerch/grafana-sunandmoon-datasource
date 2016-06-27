@@ -1,6 +1,6 @@
 {
   "name": "Sun and Moon",
-  "id": "sunandmoon",
+  "id": "fetzerch-sunandmoon-datasource",
   "type": "datasource",
 
   "staticRoot": ".",
@@ -16,6 +16,7 @@
     "description": "Calculates position of Sun and Moon.",
     "author": {
       "name": "Christian Fetzer",
+      "email": "fetzer.ch@gmail.com",
       "url": "https://fetzerch.github.io"
     },
     "logos": {
@@ -30,7 +31,7 @@
       {"name": "Sun and Moon Position", "path": "img/screenshot.png"}
     ],
     "version": "0.1.0",
-    "updated": "2016-06-25"
+    "updated": "2016-06-27"
   },
 
   "dependencies": {
