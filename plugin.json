@@ -28,7 +28,7 @@
       {"name": "MIT License", "url": "https://github.com/fetzerch/grafana-sunandmoon-datasource/blob/master/LICENSE"}
     ],
     "screenshots": [
-      {"name": "Sun and Moon Position", "path": "img/screenshot.png"}
+      {"name": "Sun and Moon Position", "path": "src/img/screenshot.png"}
     ],
     "version": "0.1.0",
     "updated": "2016-06-27"
