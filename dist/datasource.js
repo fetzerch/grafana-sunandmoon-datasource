@@ -131,7 +131,7 @@ System.register(["./lodash", "./suncalc"], function (_export, _context) {
             },
             sunset: {
               title: "Sunset",
-              text: "Sun disappears below the horizonizon, " + "evening civil twilight starts",
+              text: "Sun disappears below the horizon, " + "evening civil twilight starts",
               tags: "sun"
             },
             dusk: {
@@ -151,7 +151,7 @@ System.register(["./lodash", "./suncalc"], function (_export, _context) {
             },
             nadir: {
               title: "Nadir",
-              text: "Darkest moment of the night, sun is in the lowest positionon",
+              text: "Darkest moment of the night, sun is in the lowest position",
               tags: "sun"
             },
             nightEnd: {
@@ -176,7 +176,7 @@ System.register(["./lodash", "./suncalc"], function (_export, _context) {
             },
             moonset: {
               title: "Moonset",
-              text: "Moon disappears below the horizonizon",
+              text: "Moon disappears below the horizon",
               tags: "moon"
             }
           };

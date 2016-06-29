@@ -93,7 +93,7 @@ export class SunAndMoonDatasource {
       },
       sunset: {
         title: "Sunset",
-        text:  "Sun disappears below the horizonizon, " +
+        text:  "Sun disappears below the horizon, " +
                "evening civil twilight starts",
         tags:  "sun"
       },
@@ -114,7 +114,7 @@ export class SunAndMoonDatasource {
       },
       nadir: {
         title: "Nadir",
-        text:  "Darkest moment of the night, sun is in the lowest positionon",
+        text:  "Darkest moment of the night, sun is in the lowest position",
         tags:  "sun"
       },
       nightEnd: {
@@ -139,7 +139,7 @@ export class SunAndMoonDatasource {
       },
       moonset: {
         title: "Moonset",
-        text:  "Moon disappears below the horizonizon",
+        text:  "Moon disappears below the horizon",
         tags:  "moon"
       }
     };

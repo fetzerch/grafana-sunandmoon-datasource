@@ -9,14 +9,14 @@ calculates the position of Sun and Moon as well as the Moon illumination using
 Additionally it provides annotations for sunrise, sunset, twilight,
 moonrise, moonset and others.
 
-![SunAndMoon](src/img/screenshot.png)
+![SunAndMoon](https://raw.githubusercontent.com/fetzerch/grafana-sunandmoon-datasource/master/src/img/screenshot.png)
 
 ## Configuration
 
 All values are location dependent, the reference location needs to be
 configured in the datasource settings.
 
-![SunAndMoon Configuration](src/img/configuration.png)
+![SunAndMoon Configuration](https://raw.githubusercontent.com/fetzerch/grafana-sunandmoon-datasource/master/src/img/configuration.png)
 
 ## License
 
