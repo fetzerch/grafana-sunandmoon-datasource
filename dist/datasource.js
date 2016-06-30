@@ -1,9 +1,9 @@
 "use strict";
 
-System.register(["./lodash", "./suncalc"], function (_export, _context) {
+System.register(["./lodash", "moment", "./suncalc"], function (_export, _context) {
   "use strict";
 
-  var _, SunCalc, _createClass, SunAndMoonDatasource;
+  var _, moment, SunCalc, _createClass, SunAndMoonDatasource;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -14,6 +14,8 @@ System.register(["./lodash", "./suncalc"], function (_export, _context) {
   return {
     setters: [function (_lodash) {
       _ = _lodash.default;
+    }, function (_moment) {
+      moment = _moment.default;
     }, function (_suncalc) {
       SunCalc = _suncalc.default;
     }],
@@ -234,8 +236,8 @@ System.register(["./lodash", "./suncalc"], function (_export, _context) {
         }, {
           key: "annotationQuery",
           value: function annotationQuery(options) {
-            var from = options.range.from;
-            var to = options.range.to.add(1, "days");
+            var from = moment(options.range.from);
+            var to = moment(options.range.to).add(1, "days");
             var targets = "*";
             if (options.annotation.query !== undefined) targets = options.annotation.query.split(/\s*[\s,]\s*/);
 
