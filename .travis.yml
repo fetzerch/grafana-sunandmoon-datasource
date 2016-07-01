@@ -6,7 +6,11 @@ before_script:
 script:
   - yarn build
   - yarn lint
+  - yarn test
   - yarn markdownlint
+after_success:
+  - yarn add coveralls
+  - cat coverage/lcov.info | node_modules/coveralls/bin/coveralls.js
 cache:
   - npm
   - yarn
