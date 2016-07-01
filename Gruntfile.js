@@ -5,9 +5,28 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-execute');
   grunt.loadNpmTasks('grunt-contrib-clean');
 
+  var markdownlint = require('markdownlint');
+  grunt.registerMultiTask('markdownlint', function task() {
+    var result = markdownlint.sync({'files': this.filesSrc,
+                                    'config': this.data.config});
+    if (result.toString().length > 0) {
+      grunt.fail.warn("\n" + result + "\n");
+    }
+  });
+
   grunt.initConfig({
 
     clean: ['dist'],
+
+    markdownlint: {
+      files: {
+        config: {
+          'default': true,
+          'MD041': false
+        },
+        'src': ['*.md']
+      }
+    },
 
     copy: {
       src_to_dist: {
@@ -128,6 +147,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('default', [
+    'markdownlint',
     'clean',
     'copy:src_to_dist',
     'copy:img_to_dist',

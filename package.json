@@ -37,7 +37,8 @@
     "q": "~1.4.1",
     "chai": "~3.5.0",
     "jshint-stylish": "~2.2.0",
-    "grunt-contrib-jshint": "~1.0.0"
+    "grunt-contrib-jshint": "~1.0.0",
+    "markdownlint": "0.1.1"
   },
   "dependencies": {
     "babel-plugin-transform-es2015-for-of": "^6.6.0",
