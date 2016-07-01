@@ -26,6 +26,11 @@ This projected is licensed under the terms of the MIT license.
 
 ## Changelog
 
+### v0.1.1 (07/15)
+
+- Fixed bug where only the first of multiple configured annotations was
+  displayed.
+
 ### v0.1.0 (06/15)
 
 - Initial version with sun and moon calculation and annotations.
