@@ -21,3 +21,11 @@ configured in the datasource settings.
 ## License
 
 This projected is licensed under the terms of the MIT license.
+
+---
+
+## Changelog
+
+### v0.1.0 (06/15)
+
+- Initial version with sun and moon calculation and annotations.
