@@ -1,4 +1,5 @@
 import _ from "./lodash";
+import moment from 'moment';
 import SunCalc from "./suncalc";
 
 export class SunAndMoonDatasource {
@@ -190,8 +191,8 @@ export class SunAndMoonDatasource {
   }
 
   annotationQuery(options) {
-    var from = options.range.from;
-    var to = options.range.to.add(1, "days");
+    var from = moment(options.range.from);
+    var to = moment(options.range.to).add(1, "days");
     var targets = "*";
     if (options.annotation.query !== undefined)
       targets = options.annotation.query.split(/\s*[\s,]\s*/);
