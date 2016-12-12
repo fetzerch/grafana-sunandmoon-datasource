@@ -64,7 +64,7 @@ System.register(['app/plugins/sdk'], function (_export, _context) {
         function SunAndMoonDatasourceQueryCtrl($scope, $injector, uiSegmentSrv) {
           _classCallCheck(this, SunAndMoonDatasourceQueryCtrl);
 
-          var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SunAndMoonDatasourceQueryCtrl).call(this, $scope, $injector));
+          var _this = _possibleConstructorReturn(this, (SunAndMoonDatasourceQueryCtrl.__proto__ || Object.getPrototypeOf(SunAndMoonDatasourceQueryCtrl)).call(this, $scope, $injector));
 
           _this.scope = $scope;
           _this.uiSegmentSrv = uiSegmentSrv;

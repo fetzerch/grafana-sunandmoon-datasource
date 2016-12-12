@@ -26,6 +26,10 @@ This projected is licensed under the terms of the MIT license.
 
 ## Changelog
 
+### v0.1.2 (12/16)
+
+- Fixed compatibility with Grafana 4.0.
+
 ### v0.1.1 (07/16)
 
 - Fixed bug where only the first of multiple configured annotations was
