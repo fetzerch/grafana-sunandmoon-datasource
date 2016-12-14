@@ -8,11 +8,12 @@ export class SunAndMoonDatasourceQueryCtrl extends QueryCtrl {
     this.scope = $scope;
     this.uiSegmentSrv = uiSegmentSrv;
     this.target.target = this.target.target || 'select metric';
-  }
 
-  getOptions() {
-    return this.datasource.metricFindQuery(this.target)
-      .then(this.uiSegmentSrv.transformToSegments(false));
+    // Since we know this is not doing async / remote calls we can do this here
+    // This allows the metric-segment component to do text / value lookup and show metric text name
+    this.datasource.metricFindQuery(this.target).then(metrics => {
+      this.metrics = metrics;
+    });
   }
 
   onChangeInternal() {

@@ -69,15 +69,16 @@ System.register(['app/plugins/sdk'], function (_export, _context) {
           _this.scope = $scope;
           _this.uiSegmentSrv = uiSegmentSrv;
           _this.target.target = _this.target.target || 'select metric';
+
+          // Since we know this is not doing async / remote calls we can do this here
+          // This allows the metric-segment component to do text / value lookup and show metric text name
+          _this.datasource.metricFindQuery(_this.target).then(function (metrics) {
+            _this.metrics = metrics;
+          });
           return _this;
         }
 
         _createClass(SunAndMoonDatasourceQueryCtrl, [{
-          key: 'getOptions',
-          value: function getOptions() {
-            return this.datasource.metricFindQuery(this.target).then(this.uiSegmentSrv.transformToSegments(false));
-          }
-        }, {
           key: 'onChangeInternal',
           value: function onChangeInternal() {
             // Ask the panel to refresh data
