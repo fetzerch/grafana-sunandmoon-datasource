@@ -237,7 +237,8 @@ export class SunAndMoonDatasource {
   }
 
   metricFindQuery() {
-    var targets = _.keys(this.metrics);
-    return this.q.when(targets.map(function (i) { return {text: i}; }));
+    return this.q.when(_.map(this.metrics, (value, key) => {
+      return {text: value.text, value: key};
+    }));
   }
 }
