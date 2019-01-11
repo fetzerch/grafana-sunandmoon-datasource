@@ -13,7 +13,7 @@ export class SunAndMoonDatasource {
     this.templateSrv = templateSrv;
 
     // Datasource configuration
-    this.position = instanceSettings.jsonData.position;
+    this.position = instanceSettings.jsonData;
 
     // Configure available metrics
     var _p = this;
