@@ -50,7 +50,7 @@ System.register(["./lodash", "moment", "./suncalc"], function (_export, _context
           this.templateSrv = templateSrv;
 
           // Datasource configuration
-          this.position = instanceSettings.position;
+          this.position = instanceSettings.jsonData;
 
           // Configure available metrics
           var _p = this;
