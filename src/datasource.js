@@ -13,7 +13,7 @@ export class SunAndMoonDatasource {
     this.templateSrv = templateSrv;
 
     // Datasource configuration
-    this.position = instanceSettings.jsonData;
+    this.position = instanceSettings.jsonData.position;
 
     // Configure available metrics
     var _p = this;
@@ -21,7 +21,7 @@ export class SunAndMoonDatasource {
       moon_illumination: {
         text: "Moon illumination",
         calc: function(time) {
-                return SunCalc.getMoonIllumination(time).fraction;
+                return SunCalc.getMoonIllumination(new Date(time)).fraction;
               },
         values: []
       },
@@ -150,13 +150,13 @@ export class SunAndMoonDatasource {
   cachedMoonPosition(time) {
     if (!this.moonPosition)
       this.moonPosition = SunCalc.getMoonPosition(
-          time, this.position.latitude, this.position.longitude);
+          new Date(time), this.position.latitude, this.position.longitude);
     return this.moonPosition;
   }
   cachedSunPosition(time) {
     if (!this.sunPosition)
       this.sunPosition = SunCalc.getPosition(
-          time, this.position.latitude, this.position.longitude);
+          new Date(time), this.position.latitude, this.position.longitude);
     return this.sunPosition;
   }
   cleanCachedPositions() {
@@ -200,9 +200,9 @@ export class SunAndMoonDatasource {
     var result = [];
     for (let date = from; date < to; date.add(1, "days")) {
       var sunTimes = SunCalc.getTimes(
-          date, this.position.latitude, this.position.longitude);
+          new Date(date), this.position.latitude, this.position.longitude);
       var moonTimes = SunCalc.getMoonTimes(
-          date, this.position.latitude, this.position.longitude);
+          new Date(date), this.position.latitude, this.position.longitude);
       var values = _.merge({}, sunTimes,
           _.mapKeys(moonTimes, function(value, key) { return "moon" + key; }));
       for (let value in values) {
