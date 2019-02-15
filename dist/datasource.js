@@ -50,7 +50,7 @@ System.register(["./lodash", "moment", "./suncalc"], function (_export, _context
           this.templateSrv = templateSrv;
 
           // Datasource configuration
-          this.position = instanceSettings.jsonData;
+          this.position = instanceSettings.jsonData.position;
 
           // Configure available metrics
           var _p = this;
@@ -58,7 +58,7 @@ System.register(["./lodash", "moment", "./suncalc"], function (_export, _context
             moon_illumination: {
               text: "Moon illumination",
               calc: function calc(time) {
-                return SunCalc.getMoonIllumination(time).fraction;
+                return SunCalc.getMoonIllumination(new Date(time)).fraction;
               },
               values: []
             },
@@ -190,13 +190,13 @@ System.register(["./lodash", "moment", "./suncalc"], function (_export, _context
         _createClass(SunAndMoonDatasource, [{
           key: "cachedMoonPosition",
           value: function cachedMoonPosition(time) {
-            if (!this.moonPosition) this.moonPosition = SunCalc.getMoonPosition(time, this.position.latitude, this.position.longitude);
+            if (!this.moonPosition) this.moonPosition = SunCalc.getMoonPosition(new Date(time), this.position.latitude, this.position.longitude);
             return this.moonPosition;
           }
         }, {
           key: "cachedSunPosition",
           value: function cachedSunPosition(time) {
-            if (!this.sunPosition) this.sunPosition = SunCalc.getPosition(time, this.position.latitude, this.position.longitude);
+            if (!this.sunPosition) this.sunPosition = SunCalc.getPosition(new Date(time), this.position.latitude, this.position.longitude);
             return this.sunPosition;
           }
         }, {
@@ -243,8 +243,8 @@ System.register(["./lodash", "moment", "./suncalc"], function (_export, _context
 
             var result = [];
             for (var date = from; date < to; date.add(1, "days")) {
-              var sunTimes = SunCalc.getTimes(date, this.position.latitude, this.position.longitude);
-              var moonTimes = SunCalc.getMoonTimes(date, this.position.latitude, this.position.longitude);
+              var sunTimes = SunCalc.getTimes(new Date(date), this.position.latitude, this.position.longitude);
+              var moonTimes = SunCalc.getMoonTimes(new Date(date), this.position.latitude, this.position.longitude);
               var values = _.merge({}, sunTimes, _.mapKeys(moonTimes, function (value, key) {
                 return "moon" + key;
               }));

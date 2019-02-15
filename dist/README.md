@@ -1,4 +1,4 @@
-[![Circle CI Status](https://circleci.com/gh/fetzerch/grafana-sunandmoon-datasource.svg?style=shield&circle-token=2e270ffe5a00a9187d96ab5f27e44a143ada2cce)](https://circleci.com/gh/fetzerch/grafana-sunandmoon-datasource)
+[![Build Status](https://travis-ci.org/fetzerch/grafana-sunandmoon-datasource.svg?branch=master)](https://travis-ci.org/fetzerch/grafana-sunandmoon-datasource)
 
 # Sun and Moon Datasource Plugin for Grafana
 
