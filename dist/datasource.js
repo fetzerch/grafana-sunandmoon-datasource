@@ -31,9 +31,15 @@ System.register(["./lodash", "moment", "./suncalc"], function (_export, _context
           this.name = instanceSettings.name;
           this.q = $q;
           this.backendSrv = backendSrv;
-          this.templateSrv = templateSrv; // Datasource configuration
+          this.templateSrv = templateSrv; // Datasource configuration. Flatten jsonData.position.* originating from older settings.
 
-          this.position = instanceSettings.jsonData.position; // Configure available metrics
+          if ('position' in instanceSettings.jsonData) {
+            instanceSettings.jsonData.latitude = instanceSettings.jsonData.position.latitude;
+            instanceSettings.jsonData.longitude = instanceSettings.jsonData.position.longitude;
+            delete instanceSettings.jsonData.position;
+          }
+
+          this.position = instanceSettings.jsonData; // Configure available metrics
 
           var _p = this;
 
