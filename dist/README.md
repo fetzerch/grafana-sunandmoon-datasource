@@ -1,4 +1,4 @@
-[![Circle CI Status](https://circleci.com/gh/fetzerch/grafana-sunandmoon-datasource.svg?style=shield&circle-token=2e270ffe5a00a9187d96ab5f27e44a143ada2cce)](https://circleci.com/gh/fetzerch/grafana-sunandmoon-datasource)
+[![Build Status](https://travis-ci.org/fetzerch/grafana-sunandmoon-datasource.svg?branch=master)](https://travis-ci.org/fetzerch/grafana-sunandmoon-datasource)
 
 # Sun and Moon Datasource Plugin for Grafana
 
@@ -25,6 +25,11 @@ This projected is licensed under the terms of the MIT license.
 ---
 
 ## Changelog
+
+### v0.1.3 (02/19)
+
+- Update SunCalc dependency to 1.8.0.
+- Update other dependencies to the latest versions.
 
 ### v0.1.2 (12/16)
 

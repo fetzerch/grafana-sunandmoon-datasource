@@ -3,13 +3,13 @@
 System.register(["./lodash", "moment", "./suncalc"], function (_export, _context) {
   "use strict";
 
-  var _, moment, SunCalc, _createClass, SunAndMoonDatasource;
+  var _, moment, SunCalc, SunAndMoonDatasource;
 
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+  function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
   return {
     setters: [function (_lodash) {
@@ -20,25 +20,9 @@ System.register(["./lodash", "moment", "./suncalc"], function (_export, _context
       SunCalc = _suncalc.default;
     }],
     execute: function () {
-      _createClass = function () {
-        function defineProperties(target, props) {
-          for (var i = 0; i < props.length; i++) {
-            var descriptor = props[i];
-            descriptor.enumerable = descriptor.enumerable || false;
-            descriptor.configurable = true;
-            if ("value" in descriptor) descriptor.writable = true;
-            Object.defineProperty(target, descriptor.key, descriptor);
-          }
-        }
-
-        return function (Constructor, protoProps, staticProps) {
-          if (protoProps) defineProperties(Constructor.prototype, protoProps);
-          if (staticProps) defineProperties(Constructor, staticProps);
-          return Constructor;
-        };
-      }();
-
-      _export("SunAndMoonDatasource", SunAndMoonDatasource = function () {
+      _export("SunAndMoonDatasource", SunAndMoonDatasource =
+      /*#__PURE__*/
+      function () {
         function SunAndMoonDatasource(instanceSettings, $q, backendSrv, templateSrv) {
           _classCallCheck(this, SunAndMoonDatasource);
 
@@ -47,13 +31,12 @@ System.register(["./lodash", "moment", "./suncalc"], function (_export, _context
           this.name = instanceSettings.name;
           this.q = $q;
           this.backendSrv = backendSrv;
-          this.templateSrv = templateSrv;
+          this.templateSrv = templateSrv; // Datasource configuration
 
-          // Datasource configuration
-          this.position = instanceSettings.jsonData.position;
+          this.position = instanceSettings.jsonData.position; // Configure available metrics
 
-          // Configure available metrics
           var _p = this;
+
           this.metrics = {
             moon_illumination: {
               text: "Moon illumination",
@@ -97,9 +80,8 @@ System.register(["./lodash", "moment", "./suncalc"], function (_export, _context
               },
               values: []
             }
-          };
+          }; // Configure annotations
 
-          // Configure annotations
           this.annotations = {
             sunrise: {
               title: "Sunrise",
@@ -182,9 +164,7 @@ System.register(["./lodash", "moment", "./suncalc"], function (_export, _context
               tags: "moon"
             }
           };
-        }
-
-        // Cache values
+        } // Cache values
 
 
         _createClass(SunAndMoonDatasource, [{
@@ -215,23 +195,31 @@ System.register(["./lodash", "moment", "./suncalc"], function (_export, _context
 
             var targets = _.map(options.targets, function (i) {
               return i.target;
-            });
+            }); // Result map
 
-            // Result map
+
             var series = _.pick(this.metrics, targets);
+
             for (var idx = 0, time = from; time < to; idx += 1, time += Math.ceil(stepInSeconds)) {
               for (var metric in series) {
                 series[metric].values[idx] = [series[metric].calc(time), time];
               }
+
               this.cleanCachedPositions();
             }
 
             var targetSeries = [];
+
             for (var _metric in series) {
-              targetSeries.push({ "target": series[_metric].text,
-                "datapoints": series[_metric].values });
+              targetSeries.push({
+                "target": series[_metric].text,
+                "datapoints": series[_metric].values
+              });
             }
-            return { "data": targetSeries };
+
+            return {
+              "data": targetSeries
+            };
           }
         }, {
           key: "annotationQuery",
@@ -240,14 +228,16 @@ System.register(["./lodash", "moment", "./suncalc"], function (_export, _context
             var to = moment(options.range.to).add(1, "days");
             var targets = "*";
             if (options.annotation.query !== undefined) targets = options.annotation.query.split(/\s*[\s,]\s*/);
-
             var result = [];
+
             for (var date = from; date < to; date.add(1, "days")) {
               var sunTimes = SunCalc.getTimes(date, this.position.latitude, this.position.longitude);
               var moonTimes = SunCalc.getMoonTimes(date, this.position.latitude, this.position.longitude);
+
               var values = _.merge({}, sunTimes, _.mapKeys(moonTimes, function (value, key) {
                 return "moon" + key;
               }));
+
               for (var value in values) {
                 if (targets != "*" && targets.indexOf(value) < 0) continue;
                 result.push({
@@ -259,37 +249,50 @@ System.register(["./lodash", "moment", "./suncalc"], function (_export, _context
                 });
               }
             }
+
             return this.q.when(result);
           }
         }, {
           key: "testDatasource",
           value: function testDatasource() {
             var res = {};
+
             if (this.position.latitude < -90 || this.position.latitude > 90) {
-              res = { "status": "error", title: "Error",
-                message: "Latitude not in range -+90." };
+              res = {
+                "status": "error",
+                title: "Error",
+                message: "Latitude not in range -+90."
+              };
             } else if (this.position.longitude < -360 || this.position.longitude > 360) {
-              res = { "status": "error", title: "Error",
-                message: "Longitude not in range -+360." };
+              res = {
+                "status": "error",
+                title: "Error",
+                message: "Longitude not in range -+360."
+              };
             } else {
-              res = { "status": "success", title: "Success",
-                message: "Datasource added successfully." };
+              res = {
+                "status": "success",
+                title: "Success",
+                message: "Datasource added successfully."
+              };
             }
+
             return this.q.when(res);
           }
         }, {
           key: "metricFindQuery",
           value: function metricFindQuery() {
             return this.q.when(_.map(this.metrics, function (value, key) {
-              return { text: value.text, value: key };
+              return {
+                text: value.text,
+                value: key
+              };
             }));
           }
         }]);
 
         return SunAndMoonDatasource;
       }());
-
-      _export("SunAndMoonDatasource", SunAndMoonDatasource);
     }
   };
 });

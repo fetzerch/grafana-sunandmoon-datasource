@@ -2,9 +2,6 @@ module.exports = function(grunt) {
 
   require('load-grunt-tasks')(grunt);
 
-  grunt.loadNpmTasks('grunt-execute');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-
   var markdownlint = require('markdownlint');
   grunt.registerMultiTask('markdownlint', function task() {
     var result = markdownlint.sync({'files': this.filesSrc,
@@ -80,14 +77,13 @@ module.exports = function(grunt) {
     babel: {
       options: {
         sourceMap: true,
-        presets:  ['es2015']
+        presets:  ['@babel/env']
       },
-      dist: {
-        options: {
-          plugins: [
-            'transform-es2015-modules-systemjs',
-            'transform-es2015-for-of'
-          ]
+        dist: {
+          options: {
+            plugins: [
+              '@babel/plugin-transform-modules-systemjs'
+            ]
         },
         files: [{
           cwd: 'src',
@@ -125,7 +121,6 @@ module.exports = function(grunt) {
       },
       options: {
         jshintrc: true,
-        reporter: require('jshint-stylish'),
         ignores: [
           'node_modules/*',
           'dist/*'

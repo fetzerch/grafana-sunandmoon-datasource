@@ -26,6 +26,11 @@ This projected is licensed under the terms of the MIT license.
 
 ## Changelog
 
+### v0.1.3 (02/19)
+
+- Update SunCalc dependency to 1.8.0.
+- Update other dependencies to the latest versions.
+
 ### v0.1.2 (12/16)
 
 - Fixed compatibility with Grafana 4.0.
