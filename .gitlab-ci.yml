@@ -1,5 +1,5 @@
 test:
-  image: node:4.2.6
+  image: node:11-slim
   before_script:
     - npm install
     - npm install -g grunt-cli
