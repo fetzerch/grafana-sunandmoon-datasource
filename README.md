@@ -26,6 +26,10 @@ This projected is licensed under the terms of the MIT license.
 
 ## Changelog
 
+### v0.1.4 (03/19)
+
+- Added Support for [datasource provisioning](http://docs.grafana.org/administration/provisioning/#datasources).
+
 ### v0.1.3 (02/19)
 
 - Update SunCalc dependency to 1.8.0.

@@ -1,8 +1,6 @@
 import {SunAndMoonDatasource} from './datasource';
+import {SunAndMoonConfigCtrl} from './config_ctrl';
 import {SunAndMoonDatasourceQueryCtrl} from './query_ctrl';
-
-class SunAndMoonConfigCtrl {}
-SunAndMoonConfigCtrl.templateUrl = 'partials/config.html';
 
 class SunAndMoonQueryOptionsCtrl {}
 SunAndMoonQueryOptionsCtrl.templateUrl = 'partials/query.options.html';
