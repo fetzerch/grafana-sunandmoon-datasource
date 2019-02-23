@@ -128,6 +128,14 @@ module.exports = function(grunt) {
       }
     },
 
+    eslint: {
+      source: {
+        files: {
+          src: ['src/**/*.js']
+        }
+      }
+    },
+
     mochaTest: {
       test: {
         options: {
@@ -150,6 +158,7 @@ module.exports = function(grunt) {
     'copy:pluginDef',
     'babel',
     'jshint',
+    'eslint',
     'mochaTest'
   ]);
 
