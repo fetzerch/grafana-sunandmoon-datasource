@@ -21,7 +21,7 @@ module.exports = function(grunt) {
           'default': true,
           'MD041': false
         },
-        'src': ['*.md']
+        'src': ['*.md', 'dev-env/*.md']
       }
     },
 
