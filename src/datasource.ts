@@ -1,19 +1,23 @@
-import _ from "./lodash";
-import moment from 'moment';
-import SunCalc from "./suncalc";
+import _ from "lodash";
+import moment from "moment";
+import * as SunCalc from "suncalc";
+
+interface Position {
+  latitude: number;
+  longitude: number;
+}
 
 export class SunAndMoonDatasource {
+  position: Position;
+  metrics: any;
+  annotations: any;
+  private moonPosition: SunCalc.GetMoonPositionResult;
+  private sunPosition: SunCalc.GetSunPositionResult;
 
-  constructor(instanceSettings, $q, backendSrv, templateSrv) {
-    this.type = instanceSettings.type;
-    this.url = instanceSettings.url;
-    this.name = instanceSettings.name;
-    this.q = $q;
-    this.backendSrv = backendSrv;
-    this.templateSrv = templateSrv;
+  constructor(instanceSettings, private backendSrv, private templateSrv, private $q) {
 
     // Datasource configuration. Flatten jsonData.position.* originating from older settings.
-    if ('position' in instanceSettings.jsonData) {
+    if ("position" in instanceSettings.jsonData) {
       instanceSettings.jsonData.latitude = instanceSettings.jsonData.position.latitude;
       instanceSettings.jsonData.longitude = instanceSettings.jsonData.position.longitude;
       delete instanceSettings.jsonData.position;
@@ -21,46 +25,35 @@ export class SunAndMoonDatasource {
     this.position = instanceSettings.jsonData;
 
     // Configure available metrics
-    var _p = this;
     this.metrics = {
       moon_illumination: {
         text: "Moon illumination",
-        calc: function(time) {
-                return SunCalc.getMoonIllumination(time).fraction;
-              },
+        calc: (time) => SunCalc.getMoonIllumination(time).fraction,
         values: []
       },
       moon_altitude: {
         text: "Moon altitude",
-        calc: function(time) {
-          return _p.cachedMoonPosition(time).altitude * 180 / Math.PI;
-        },
+        calc: (time) => this.cachedMoonPosition(time).altitude * 180 / Math.PI,
         values: []
       },
       moon_azimuth: {
         text: "Moon azimuth",
-        calc: function(time) {
-          return _p.cachedMoonPosition(time).azimuth * 180 / Math.PI;
-        },
+        calc: (time) => this.cachedMoonPosition(time).azimuth * 180 / Math.PI,
         values: []
       },
       moon_distance: {
         text: "Moon distance",
-        calc: function(time) { return _p.cachedMoonPosition(time).distance; },
+        calc: (time) => this.cachedMoonPosition(time).distance,
         values: []
       },
       sun_altitude: {
         text: "Sun altitude",
-        calc: function(time) {
-          return _p.cachedSunPosition(time).altitude * 180 / Math.PI;
-        },
+        calc: (time) => this.cachedSunPosition(time).altitude * 180 / Math.PI,
         values: []
       },
       sun_azimuth: {
         text: "Sun azimuth",
-        calc: function(time) {
-          return _p.cachedSunPosition(time).azimuth * 180 / Math.PI;
-        },
+        calc: (time) => this.cachedSunPosition(time).azimuth * 180 / Math.PI,
         values: []
       }
     };
@@ -163,15 +156,17 @@ export class SunAndMoonDatasource {
 
   // Cache values
   cachedMoonPosition(time) {
-    if (!this.moonPosition)
+    if (!this.moonPosition) {
       this.moonPosition = SunCalc.getMoonPosition(
           time, this.position.latitude, this.position.longitude);
+    }
     return this.moonPosition;
   }
   cachedSunPosition(time) {
-    if (!this.sunPosition)
+    if (!this.sunPosition) {
       this.sunPosition = SunCalc.getPosition(
           time, this.position.latitude, this.position.longitude);
+    }
     return this.sunPosition;
   }
   cleanCachedPositions() {
@@ -180,25 +175,25 @@ export class SunAndMoonDatasource {
   }
 
   query(options) {
-    var from = options.range.from.valueOf();
-    var to = options.range.to.valueOf();
-    var maxDataPoints = options.maxDataPoints;
-    var stepInSeconds = (to - from) / maxDataPoints;
+    const from = options.range.from.valueOf();
+    const to = options.range.to.valueOf();
+    const maxDataPoints = options.maxDataPoints;
+    const stepInSeconds = (to - from) / maxDataPoints;
 
-    var targets = _.map(options.targets, function(i) { return i.target; });
+    const targets = _.map(options.targets, (i) => i.target);
 
     // Result map
-    var series = _.pick(this.metrics, targets);
+    const series = _.pick(this.metrics, targets);
     for (let idx = 0, time = from; time < to;
          idx += 1, time += Math.ceil(stepInSeconds)) {
-      for (let metric in series) {
+      for (const metric in series) {
         series[metric].values[idx] = [series[metric].calc(time), time];
       }
       this.cleanCachedPositions();
     }
 
-    var targetSeries = [];
-    for (let metric in series) {
+    const targetSeries: any[] = [];
+    for (const metric in series) {
       targetSeries.push({"target": series[metric].text,
                          "datapoints": series[metric].values});
     }
@@ -206,26 +201,28 @@ export class SunAndMoonDatasource {
   }
 
   annotationQuery(options) {
-    var from = moment(options.range.from);
-    var to = moment(options.range.to).add(1, "days");
-    var targets = "*";
-    if (options.annotation.query !== undefined)
+    const from = moment(options.range.from);
+    const to = moment(options.range.to).add(1, "days");
+    let targets = "*";
+    if (options.annotation.query !== undefined) {
       targets = options.annotation.query.split(/\s*[\s,]\s*/);
+    }
 
-    var result = [];
-    for (let date = from; date < to; date.add(1, "days")) {
-      var sunTimes = SunCalc.getTimes(
-          date, this.position.latitude, this.position.longitude);
-      var moonTimes = SunCalc.getMoonTimes(
-          date, this.position.latitude, this.position.longitude);
-      var values = _.merge({}, sunTimes,
-          _.mapKeys(moonTimes, function(value, key) { return "moon" + key; }));
-      var setHours = Date.prototype[options.dashboard.isTimezoneUtc() ? "setUTCHours" : "setHours"];
+    const result: any[] = [];
+    for (const date = from; date < to; date.add(1, "days")) {
+      const sunTimes = SunCalc.getTimes(
+          date.toDate(), this.position.latitude, this.position.longitude);
+      const moonTimes = SunCalc.getMoonTimes(
+          date.toDate(), this.position.latitude, this.position.longitude);
+      const values = _.merge({}, sunTimes,
+          _.mapKeys(moonTimes, (value, key) => "moon" + key));
+      const setHours = Date.prototype[options.dashboard.isTimezoneUtc() ? "setUTCHours" : "setHours"];
       values.noon = setHours.call(date.toDate(), 12, 0, 0);
       values.midnight = setHours.call(date.toDate(), 0, 0, 0);
-      for (let value in values) {
-        if (targets != "*" && targets.indexOf(value) < 0)
-          continue;
+      for (const value in values) {
+        if (targets !== "*" && targets.indexOf(value) < 0) {
+            continue;
+        }
         result.push({
           "annotation": options.annotation,
           "title": this.annotations[value].title,
@@ -235,11 +232,11 @@ export class SunAndMoonDatasource {
         });
       }
     }
-    return this.q.when(result);
+    return this.$q.when(result);
   }
 
   testDatasource() {
-    var res = {};
+    let res = {};
     if (this.position.latitude < -90 || this.position.latitude > 90) {
       res = {"status": "error", title: "Error",
              message: "Latitude not in range -+90."};
@@ -251,11 +248,11 @@ export class SunAndMoonDatasource {
       res = {"status": "success", title: "Success",
              message: "Datasource added successfully."};
     }
-    return this.q.when(res);
+    return this.$q.when(res);
   }
 
   metricFindQuery() {
-    return this.q.when(_.map(this.metrics, (value, key) => {
+    return this.$q.when(_.map(this.metrics, (value, key) => {
       return {text: value.text, value: key};
     }));
   }

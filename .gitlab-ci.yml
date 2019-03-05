@@ -1,10 +1,13 @@
 test:
-  image: node:11-slim
+  image: node:11
   before_script:
-    - npm install
-    - npm install -g grunt-cli
+    - yarn config set cache-folder "$(pwd)/.yarn"
+    - yarn install
   script:
-    - grunt test
+    - yarn build
+    - yarn lint
+    - yarn markdownlint
   cache:
     paths:
       - node_modules
+      - .yarn

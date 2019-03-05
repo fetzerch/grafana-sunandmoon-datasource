@@ -12,7 +12,7 @@ have to be translated with Babel whenever they change:
 ```console
 cd ..
 npm install
-grunt watch
+npm run watch
 ```
 
 Grafana needs to be restarted whenever the `plugin.json` is modified.

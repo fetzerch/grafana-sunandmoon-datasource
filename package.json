@@ -5,7 +5,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "grunt test"
+    "build": "webpack --config webpack.config.js",
+    "watch": "webpack --config webpack.config.js --watch",
+    "lint": "tslint src/**/*.ts",
+    "markdownlint": "markdownlint *.md dev-env/*.md"
   },
   "repository": {
     "type": "git",
@@ -21,24 +24,25 @@
     "url": "https://github.com/fetzerch/grafana-sunandmoon-datasource/issues"
   },
   "devDependencies": {
-    "@babel/core": "~7.3.3",
-    "@babel/plugin-transform-modules-systemjs": "~7.2.0",
-    "@babel/preset-env": "~7.3.1",
-    "eslint": "^5.14.1",
-    "grunt": "~1.0.3",
-    "grunt-babel": "~8.0.0",
-    "grunt-contrib-clean": "~2.0.0",
-    "grunt-contrib-copy": "~1.0.0",
-    "grunt-contrib-jshint": "~2.0.0",
-    "grunt-contrib-watch": "~1.1.0",
-    "grunt-eslint": "21.0.0",
-    "grunt-mocha-test": "~0.13.3",
-    "load-grunt-tasks": "~4.0.0",
+    "@types/grafana": "https://git@github.com/briangann/types-grafana.git",
+    "@types/suncalc": "~1.8.0",
+    "clean-webpack-plugin": "~2.0.0",
+    "copy-webpack-plugin": "~5.0.0",
+    "grafana-sdk-mocks": "github:grafana/grafana-sdk-mocks",
     "markdownlint": "~0.12.0",
-    "mocha": "~6.0.1"
+    "markdownlint-cli": "~0.14.0",
+    "q": "~1.5.1",
+    "ts-jest": "~24.0.0",
+    "ts-loader": "~5.3.0",
+    "tslint": "~5.14.0",
+    "tslint-loader": "~3.5.4",
+    "typescript": "~3.3.3333",
+    "webpack": "~4.29.6",
+    "webpack-cli": "~3.3.0"
   },
   "dependencies": {
     "lodash": "^4.17.11",
+    "moment": "^2.24.0",
     "suncalc": "^1.8.0"
   },
   "homepage": "https://github.com/fetzerch/grafana-sunandmoon-datasource"
