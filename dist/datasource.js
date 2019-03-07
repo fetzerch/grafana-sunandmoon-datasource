@@ -168,6 +168,16 @@ System.register(["./lodash", "moment", "./suncalc"], function (_export, _context
               title: "Moonset",
               text: "Moon disappears below the horizon",
               tags: "moon"
+            },
+            noon: {
+              title: "Noon",
+              text: "12 o'clock in the daytime",
+              tags: "time"
+            },
+            midnight: {
+              title: "Midnight",
+              text: "12 o'clock in the night",
+              tags: "time"
             }
           };
         } // Cache values
@@ -243,6 +253,10 @@ System.register(["./lodash", "moment", "./suncalc"], function (_export, _context
               var values = _.merge({}, sunTimes, _.mapKeys(moonTimes, function (value, key) {
                 return "moon" + key;
               }));
+
+              var setHours = Date.prototype[options.dashboard.isTimezoneUtc() ? "setUTCHours" : "setHours"];
+              values.noon = setHours.call(date.toDate(), 12, 0, 0);
+              values.midnight = setHours.call(date.toDate(), 0, 0, 0);
 
               for (var value in values) {
                 if (targets != "*" && targets.indexOf(value) < 0) continue;

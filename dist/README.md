@@ -29,6 +29,7 @@ This projected is licensed under the terms of the MIT license.
 ### v0.1.4 (03/19)
 
 - Added Support for [datasource provisioning](http://docs.grafana.org/administration/provisioning/#datasources).
+- Added annotations for noon and midnight.
 
 ### v0.1.3 (02/19)
 

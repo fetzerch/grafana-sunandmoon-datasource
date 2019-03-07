@@ -31,7 +31,7 @@
       {"name": "Sun and Moon Position", "path": "src/img/screenshot.png"}
     ],
     "version": "0.1.4",
-    "updated": "2019-03-05"
+    "updated": "2019-03-08"
   },
 
   "dependencies": {
