@@ -37,6 +37,13 @@
         "iconColor": "rgb(98, 164, 0)",
         "name": "Golden Hour",
         "query": "goldenHour"
+      },
+      {
+        "datasource": "sunandmoon",
+        "enable": true,
+        "iconColor": "rgb(21, 14, 120)",
+        "name": "Noon / Midnight",
+        "query": "noon,midnight"
       }
     ]
   },
