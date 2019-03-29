@@ -35,3 +35,4 @@ grafana
 
 # Test artifacts
 /dist/test/
+junit-*.xml

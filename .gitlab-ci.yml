@@ -6,8 +6,15 @@ test:
   script:
     - yarn build
     - yarn lint
+    - yarn test
     - yarn markdownlint
   cache:
     paths:
       - node_modules
       - .yarn
+  coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
+  artifacts:
+    reports:
+      junit: junit-*.xml
+    paths:
+      - coverage
