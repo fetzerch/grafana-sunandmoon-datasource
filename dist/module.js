@@ -97,13 +97,6 @@ var config_ctrl_1 = __webpack_require__(5);
 exports.ConfigCtrl = config_ctrl_1.SunAndMoonConfigCtrl;
 var query_ctrl_1 = __webpack_require__(6);
 exports.QueryCtrl = query_ctrl_1.SunAndMoonDatasourceQueryCtrl;
-var SunAndMoonQueryOptionsCtrl = /** @class */ (function () {
-    function SunAndMoonQueryOptionsCtrl() {
-    }
-    SunAndMoonQueryOptionsCtrl.templateUrl = "partials/query.options.html";
-    return SunAndMoonQueryOptionsCtrl;
-}());
-exports.QueryOptionsCtrl = SunAndMoonQueryOptionsCtrl;
 var SunAndMoonAnnotationsQueryCtrl = /** @class */ (function () {
     function SunAndMoonAnnotationsQueryCtrl() {
     }
