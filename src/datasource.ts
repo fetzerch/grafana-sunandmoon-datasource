@@ -216,7 +216,10 @@ export class SunAndMoonDatasource {
           date.toDate(), this.position.latitude, this.position.longitude);
       const values = _.merge({}, sunTimes,
           _.mapKeys(moonTimes, (value, key) => "moon" + key));
-      const setHours = Date.prototype[options.dashboard.isTimezoneUtc() ? "setUTCHours" : "setHours"];
+      let setHours = Date.prototype.setHours;
+      if (options.dashboard !== undefined && options.dashboard.isTimezoneUtc()) {
+          setHours = Date.prototype.setUTCHours;
+      }
       values.noon = setHours.call(date.toDate(), 12, 0, 0);
       values.midnight = setHours.call(date.toDate(), 0, 0, 0);
       for (const value in values) {

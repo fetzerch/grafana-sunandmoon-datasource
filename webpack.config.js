@@ -19,7 +19,6 @@ module.exports = {
     libraryTarget: "amd",
   },
   externals: [
-    "lodash",
     "moment",
     function(context, request, callback) {
       var prefix = "grafana/";
