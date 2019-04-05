@@ -15,9 +15,4 @@ export class SunAndMoonDatasourceQueryCtrl extends QueryCtrl {
       this.metrics = metrics;
     });
   }
-
-  onChangeInternal() {
-    // Ask the panel to refresh data
-    this.panelCtrl.refresh();
-  }
 }

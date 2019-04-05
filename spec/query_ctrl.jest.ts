@@ -15,9 +15,4 @@ describe("SunAndMoonQueryCtrl", () => {
   it("constructor should query metrics", () => {
     expect(ctx.datasource.metricFindQuery).toHaveBeenCalled();
   });
-
-  it("onChangeInternal should refresh the panel control", () => {
-    ctx.qc.onChangeInternal();
-    expect(ctx.panelCtrl.refresh).toHaveBeenCalled();
-  });
 });

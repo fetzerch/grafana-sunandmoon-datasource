@@ -745,10 +745,6 @@ var SunAndMoonDatasourceQueryCtrl = /** @class */ (function (_super) {
         });
         return _this;
     }
-    SunAndMoonDatasourceQueryCtrl.prototype.onChangeInternal = function () {
-        // Ask the panel to refresh data
-        this.panelCtrl.refresh();
-    };
     SunAndMoonDatasourceQueryCtrl.templateUrl = "partials/query.editor.html";
     return SunAndMoonDatasourceQueryCtrl;
 }(sdk_1.QueryCtrl));
