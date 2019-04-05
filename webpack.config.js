@@ -35,6 +35,7 @@ module.exports = {
     new CopyWebpackPlugin([
       { from: "../plugin.json", to: "." },
       { from: "../README.md", to: "." },
+      { from: "../CHANGELOG.md", to: "." },
       { from: "../LICENSE", to: "." },
       { from: "partials/*", to: "." },
       { from: "img/*", to: "src" },
