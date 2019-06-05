@@ -8,6 +8,8 @@ script:
   - yarn lint
   - yarn test
   - yarn markdownlint
+  # Make sure build output has been committed.
+  - git status --porcelain || (echo "Repo is dirty"; git diff; false)
 after_success:
   - yarn add coveralls
   - cat coverage/lcov.info | node_modules/coveralls/bin/coveralls.js

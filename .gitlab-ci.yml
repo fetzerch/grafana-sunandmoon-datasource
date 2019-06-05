@@ -8,6 +8,8 @@ test:
     - yarn lint
     - yarn test
     - yarn markdownlint
+    # Make sure build output has been committed.
+    - git status --porcelain || (echo "Repo is dirty"; git diff; false)
   cache:
     paths:
       - node_modules
