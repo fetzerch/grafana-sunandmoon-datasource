@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.5] - 2019-08-01
+
 ### Fixed
 
 - Annotations were incorrectly tagged with a single tag per character
