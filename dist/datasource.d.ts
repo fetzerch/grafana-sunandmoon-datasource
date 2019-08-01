@@ -16,9 +16,7 @@ export declare class SunAndMoonDatasource {
     cachedMoonPosition(time: any): SunCalc.GetMoonPositionResult;
     cachedSunPosition(time: any): SunCalc.GetSunPositionResult;
     cleanCachedPositions(): void;
-    query(options: any): {
-        "data": any[];
-    };
+    query(options: any): any;
     annotationQuery(options: any): any;
     testDatasource(): any;
     metricFindQuery(): any;

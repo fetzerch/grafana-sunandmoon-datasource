@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Annotations were incorrectly tagged with a single tag per character
   (e.g. `s`, `u`, `n` instead of `sun`). ([grafana/#15987](https://github.com/grafana/grafana/pull/15987))
 - Compatibility with Grafana v3.
+- Compatibility with Grafana v6.3.
 
 ## [0.1.4] - 2019-03-08
 

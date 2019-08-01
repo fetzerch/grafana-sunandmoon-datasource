@@ -303,7 +303,7 @@ var SunAndMoonDatasource = /** @class */ (function () {
             targetSeries.push({ "target": series[metric].text,
                 "datapoints": series[metric].values });
         }
-        return { "data": targetSeries };
+        return this.$q.when({ "data": targetSeries });
     };
     SunAndMoonDatasource.prototype.annotationQuery = function (options) {
         var from = moment_1.default(options.range.from);

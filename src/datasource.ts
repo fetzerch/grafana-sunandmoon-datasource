@@ -197,7 +197,7 @@ export class SunAndMoonDatasource {
       targetSeries.push({"target": series[metric].text,
                          "datapoints": series[metric].values});
     }
-    return {"data": targetSeries};
+    return this.$q.when({"data": targetSeries});
   }
 
   annotationQuery(options) {

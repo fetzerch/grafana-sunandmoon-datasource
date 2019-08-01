@@ -25,8 +25,9 @@ describe("SunAndMoonDatasource", () => {
         to: moment("2016/06/26", "YYYY/MM/DD")
       }
     };
-    const result = ctx.ds.query(options);
-    expect(result.data).toHaveLength(0);
+    return ctx.ds.query(options).then(results => {
+      expect(results.data).toHaveLength(0);
+    });
   });
 
   it("query should return values", () => {
@@ -45,8 +46,9 @@ describe("SunAndMoonDatasource", () => {
         to: moment("2019/03/27", "YYYY/MM/DD")
       }
     };
-    const result = ctx.ds.query(options);
-    expect(result.data).toHaveLength(options.targets.length);
+    return ctx.ds.query(options).then(results => {
+      expect(results.data).toHaveLength(options.targets.length);
+    });
   });
 
   it("annotationQuery should return all values", () => {
