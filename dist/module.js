@@ -318,7 +318,7 @@ var SunAndMoonDatasource = /** @class */ (function () {
             var moonTimes = SunCalc.getMoonTimes(date.toDate(), this.position.latitude, this.position.longitude);
             var values = lodash_1.default.merge({}, sunTimes, lodash_1.default.mapKeys(moonTimes, function (value, key) { return "moon" + key; }));
             var setHours = Date.prototype.setHours;
-            if (options.dashboard !== undefined && options.dashboard.isTimezoneUtc()) {
+            if (options.dashboard !== undefined && options.dashboard.getTimezone() === "utc") {
                 setHours = Date.prototype.setUTCHours;
             }
             values.noon = setHours.call(date.toDate(), 12, 0, 0);
