@@ -217,7 +217,7 @@ export class SunAndMoonDatasource {
       const values = _.merge({}, sunTimes,
           _.mapKeys(moonTimes, (value, key) => "moon" + key));
       let setHours = Date.prototype.setHours;
-      if (options.dashboard !== undefined && options.dashboard.isTimezoneUtc()) {
+      if (options.dashboard !== undefined && options.dashboard.getTimezone() === "utc") {
           setHours = Date.prototype.setUTCHours;
       }
       values.noon = setHours.call(date.toDate(), 12, 0, 0);

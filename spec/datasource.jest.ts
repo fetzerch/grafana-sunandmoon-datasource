@@ -54,7 +54,7 @@ describe("SunAndMoonDatasource", () => {
   it("annotationQuery should return all values", () => {
     const options = {
       annotation: {},
-        dashboard: { isTimezoneUtc: () => true },
+        dashboard: { getTimezone: () => "utc" },
       range: {
         from: moment("2019/03/26", "YYYY/MM/DD"),
         to: moment("2019/03/26", "YYYY/MM/DD")
@@ -68,7 +68,7 @@ describe("SunAndMoonDatasource", () => {
   it("annotationQuery should return specified values", () => {
     const options = {
       annotation: { query: "dusk, dawn"},
-        dashboard: { isTimezoneUtc: () => true },
+        dashboard: { getTimezone: () => "utc" },
       range: {
         from: moment("2019/03/26", "YYYY/MM/DD"),
         to: moment("2019/03/26", "YYYY/MM/DD")
@@ -82,7 +82,7 @@ describe("SunAndMoonDatasource", () => {
   it("annotationQuery should support local time", () => {
     const options = {
       annotation: {},
-        dashboard: { isTimezoneUtc: () => false },
+        dashboard: { getTimezone: () => "Europe/Berlin" },
       range: {
         from: moment("2019/03/26", "YYYY/MM/DD"),
         to: moment("2019/03/26", "YYYY/MM/DD")
