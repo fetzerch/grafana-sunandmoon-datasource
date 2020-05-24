@@ -31,15 +31,15 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new CopyWebpackPlugin([
-      { from: "../plugin.json", to: "." },
-      { from: "../README.md", to: "." },
-      { from: "../CHANGELOG.md", to: "." },
-      { from: "../LICENSE", to: "." },
-      { from: "partials/*", to: "." },
-      { from: "img/*", to: "src" },
-    ], {
-      copyUnmodified: true
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: "../plugin.json", to: "." },
+        { from: "../README.md", to: "." },
+        { from: "../CHANGELOG.md", to: "." },
+        { from: "../LICENSE", to: "." },
+        { from: "partials/*", to: "." },
+        { from: "img/*", to: "src" },
+      ],
     }),
   ],
   resolve: {
