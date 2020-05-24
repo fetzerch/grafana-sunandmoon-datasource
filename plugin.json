@@ -30,8 +30,8 @@
     "screenshots": [
       {"name": "Sun and Moon Position", "path": "src/img/screenshot.png"}
     ],
-    "version": "0.1.5",
-    "updated": "2019-08-01"
+    "version": "0.1.6",
+    "updated": "2020-05-24"
   },
 
   "dependencies": {
