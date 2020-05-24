@@ -91,12 +91,13 @@ define(["moment","app/plugins/sdk"], function(__WEBPACK_EXTERNAL_MODULE__5__, __
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.AnnotationsQueryCtrl = exports.ConfigCtrl = exports.QueryCtrl = exports.Datasource = void 0;
 var datasource_1 = __webpack_require__(1);
-exports.Datasource = datasource_1.SunAndMoonDatasource;
+Object.defineProperty(exports, "Datasource", { enumerable: true, get: function () { return datasource_1.SunAndMoonDatasource; } });
 var config_ctrl_1 = __webpack_require__(7);
-exports.ConfigCtrl = config_ctrl_1.SunAndMoonConfigCtrl;
+Object.defineProperty(exports, "ConfigCtrl", { enumerable: true, get: function () { return config_ctrl_1.SunAndMoonConfigCtrl; } });
 var query_ctrl_1 = __webpack_require__(8);
-exports.QueryCtrl = query_ctrl_1.SunAndMoonDatasourceQueryCtrl;
+Object.defineProperty(exports, "QueryCtrl", { enumerable: true, get: function () { return query_ctrl_1.SunAndMoonDatasourceQueryCtrl; } });
 var SunAndMoonAnnotationsQueryCtrl = /** @class */ (function () {
     function SunAndMoonAnnotationsQueryCtrl() {
     }
@@ -112,17 +113,30 @@ exports.AnnotationsQueryCtrl = SunAndMoonAnnotationsQueryCtrl;
 
 "use strict";
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SunAndMoonDatasource = void 0;
 var lodash_1 = __importDefault(__webpack_require__(2));
 var moment_1 = __importDefault(__webpack_require__(5));
 var SunCalc = __importStar(__webpack_require__(6));
@@ -17858,6 +17872,7 @@ else {}
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SunAndMoonConfigCtrl = void 0;
 var SunAndMoonConfigCtrl = /** @class */ (function () {
     /** @ngInject */
     function SunAndMoonConfigCtrl() {
@@ -17894,6 +17909,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SunAndMoonDatasourceQueryCtrl = void 0;
 var sdk_1 = __webpack_require__(9);
 var SunAndMoonDatasourceQueryCtrl = /** @class */ (function (_super) {
     __extends(SunAndMoonDatasourceQueryCtrl, _super);
