@@ -1,14 +1,13 @@
 {
   "name": "sunandmoon-datasource",
   "private": true,
-  "version": "0.1.6",
-  "description": "",
-  "main": "index.js",
+  "version": "0.2.0",
+  "description": "Calculates position of Sun and Moon.",
   "scripts": {
-    "build": "webpack --config webpack.config.js",
-    "watch": "webpack --config webpack.config.js --watch",
-    "lint": "tslint src/**/*.ts spec/**/*.ts",
-    "test": "jest --config jest.config.js",
+    "build": "grafana-toolkit plugin:build",
+    "test": "grafana-toolkit plugin:test",
+    "dev": "grafana-toolkit plugin:dev",
+    "watch": "grafana-toolkit plugin:dev --watch",
     "markdownlint": "markdownlint *.md dev-env/*.md"
   },
   "repository": {
@@ -24,30 +23,31 @@
   "bugs": {
     "url": "https://github.com/fetzerch/grafana-sunandmoon-datasource/issues"
   },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  },
   "devDependencies": {
-    "@types/grafana": "https://git@github.com/briangann/types-grafana.git",
-    "@types/jest": "~26.0.14",
+    "@grafana/data": "^7.3.2",
+    "@grafana/toolkit": "^7.3.2",
+    "@grafana/ui": "^7.3.2",
+    "@testing-library/jest-dom": "5.11.6",
+    "@testing-library/react": "^11.1.2",
+    "@types/enzyme": "^3.10.8",
+    "@types/lodash": "latest",
     "@types/suncalc": "~1.8.0",
-    "clean-webpack-plugin": "~3.0.0",
-    "copy-webpack-plugin": "~6.2.0",
-    "grafana-sdk-mocks": "github:grafana/grafana-sdk-mocks",
-    "jest": "^26.4.2",
-    "jest-junit": "^11.1.0",
-    "markdownlint": "~0.21.0",
-    "markdownlint-cli": "~0.24.0",
-    "q": "~1.5.1",
-    "ts-jest": "~26.4.1",
-    "ts-loader": "~8.0.4",
-    "tslint": "~6.1.3",
-    "tslint-loader": "~3.5.4",
-    "typescript": "~4.0.3",
-    "webpack": "~4.44.2",
-    "webpack-cli": "~3.3.12"
+    "enzyme": "3.11.0",
+    "enzyme-adapter-react-16": "1.15.5",
+    "enzyme-to-json": "3.6.1",
+    "markdownlint": "~0.21.1",
+    "markdownlint-cli": "~0.24.0"
   },
   "dependencies": {
-    "lodash": "^4.17.20",
-    "moment": "^2.29.0",
     "suncalc": "^1.8.0"
+  },
+  "engines": {
+    "node": ">=12 <13"
   },
   "homepage": "https://github.com/fetzerch/grafana-sunandmoon-datasource"
 }

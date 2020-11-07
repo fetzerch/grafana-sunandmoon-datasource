@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render should render component 1`] = `
+<div
+  className="gf-form"
+>
+  <FormLabel>
+    Metric
+  </FormLabel>
+  <Select$1
+    className="metric"
+    onChange={[Function]}
+    options={
+      Array [
+        Object {
+          "label": "Moon illumination",
+          "value": "moon_illumination",
+        },
+        Object {
+          "label": "Moon altitude",
+          "value": "moon_altitude",
+        },
+        Object {
+          "label": "Moon azimuth",
+          "value": "moon_azimuth",
+        },
+        Object {
+          "label": "Moon distance",
+          "value": "moon_distance",
+        },
+        Object {
+          "label": "Sun altitude",
+          "value": "sun_altitude",
+        },
+        Object {
+          "label": "Sun azimuth",
+          "value": "sun_azimuth",
+        },
+      ]
+    }
+    placeholder="Metric"
+    value="sun_altitude"
+  />
+</div>
+`;

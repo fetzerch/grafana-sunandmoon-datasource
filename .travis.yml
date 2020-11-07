@@ -1,13 +1,12 @@
 language: node_js
 node_js:
-  - "14"
+  - "12"
 before_script:
   - npm install
 script:
-  - npm run build
-  - npm run lint
-  - npm run test
-  - npm run markdownlint
+  - yarn run dev
+  - yarn run build --coverage
+  - yarn run markdownlint
   # Make sure build output has been committed.
   - git status --porcelain || (echo "Repo is dirty"; git diff; false)
 after_success:

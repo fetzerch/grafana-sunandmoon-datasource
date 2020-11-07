@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render should render component 1`] = `
+<div
+  className="gf-form-group"
+>
+  <h3
+    className="page-heading"
+  >
+    Sun and Moon reference location
+  </h3>
+  <div
+    className="gf-form"
+  >
+    <InlineField
+      label="Latitude"
+      labelWidth={14}
+    >
+      <Input
+        className="latitude"
+        label="Latitude"
+        max={90}
+        min={-90}
+        onChange={[Function]}
+        placeholder="latitude"
+        required={true}
+        type="number"
+        value={48}
+      />
+    </InlineField>
+  </div>
+  <div
+    className="gf-form"
+  >
+    <InlineField
+      label="Longitude"
+      labelWidth={14}
+    >
+      <Input
+        className="longitude"
+        label="Longitude"
+        max={360}
+        min={-360}
+        onChange={[Function]}
+        placeholder="longitude"
+        required={true}
+        type="number"
+        value={10}
+      />
+    </InlineField>
+  </div>
+</div>
+`;
