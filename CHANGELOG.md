@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2020-11-16
+
+### Fixed
+
+- Glitches in graphs caused by out of order data. ([#29](https://github.com/fetzerch/grafana-sunandmoon-datasource/issues/29),
+  [grafana/#28804](https://github.com/grafana/grafana/issues/28804))
+- Annotations are no longer shown. ([#31](https://github.com/fetzerch/grafana-sunandmoon-datasource/issues/31))
+- A metric is now preselected when using the datasource on a new panel.
+
+### Added
+
+- Location is now automatically configured.
+
+### Changed
+
+- The plugin was migrated to the new plugin framework introduced in Grafana
+  7.0 and is no longer compatible with older versions of Grafana.
+
 ## [0.1.6] - 2020-05-24
 
 ### Fixed
@@ -56,7 +74,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial version with sun and moon calculation and annotations.
 
-[Unreleased]: https://github.com/fetzerch/grafana-sunandmoon-datasource/compare/v0.1.6...HEAD
+[Unreleased]: https://github.com/fetzerch/grafana-sunandmoon-datasource/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/fetzerch/grafana-sunandmoon-datasource/compare/v0.1.6...v0.2.0
 [0.1.6]: https://github.com/fetzerch/grafana-sunandmoon-datasource/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/fetzerch/grafana-sunandmoon-datasource/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/fetzerch/grafana-sunandmoon-datasource/compare/v0.1.3...v0.1.4

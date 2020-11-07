@@ -1,13 +1,12 @@
 test:
-  image: node:11
+  image: node:12
   before_script:
     - npm config set cache "$(pwd)/.npm"
     - npm install
   script:
-    - npm run build
-    - npm run lint
-    - npm run test
-    - npm run markdownlint
+    - yarn run dev
+    - yarn run build --coverage
+    - yarn run markdownlint
     # Make sure build output has been committed.
     - git status --porcelain || (echo "Repo is dirty"; git diff; false)
   cache:
@@ -17,6 +16,6 @@ test:
   coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
   artifacts:
     reports:
-      junit: junit-*.xml
+      junit: coverage/junit.xml
     paths:
       - coverage

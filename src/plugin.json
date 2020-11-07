@@ -3,12 +3,6 @@
   "id": "fetzerch-sunandmoon-datasource",
   "type": "datasource",
 
-  "staticRoot": ".",
-
-  "partials": {
-    "config": "public/app/plugins/datasource/sunandmoon/partials/config.html"
-  },
-
   "metrics": true,
   "annotations": true,
 
@@ -19,9 +13,10 @@
       "email": "fetzer.ch@gmail.com",
       "url": "https://fetzerch.github.io"
     },
+    "keywords": ["sun", "moon", "altitude", "azimuth", "illumination", "distance"],
     "logos": {
-      "small": "src/img/logo.png",
-      "large": "src/img/logo.png"
+      "small": "img/logo.png",
+      "large": "img/logo.png"
     },
     "links": [
       {"name": "GitHub", "url": "https://github.com/fetzerch/grafana-sunandmoon-datasource"},
@@ -30,12 +25,12 @@
     "screenshots": [
       {"name": "Sun and Moon Position", "path": "src/img/screenshot.png"}
     ],
-    "version": "0.1.6",
-    "updated": "2020-05-24"
+    "version": "%VERSION%",
+    "updated": "%TODAY%"
   },
-
   "dependencies": {
-    "grafanaVersion": "3.x.x",
-    "plugins": [ ]
+    "grafanaDependency": ">=7.0.0",
+    "grafanaVersion": "7.0.0",
+    "plugins": []
   }
 }

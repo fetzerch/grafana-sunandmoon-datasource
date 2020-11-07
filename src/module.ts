@@ -1,14 +1,13 @@
-import {SunAndMoonDatasource} from "./datasource";
-import {SunAndMoonConfigCtrl} from "./config_ctrl";
-import {SunAndMoonDatasourceQueryCtrl} from "./query_ctrl";
+import { DataSourcePlugin } from '@grafana/data';
+import { AnnotationQueryEditor } from './AnnotationQueryEditor';
+import { SunAndMoonDataSource } from './DataSource';
+import { ConfigEditor } from './ConfigEditor';
+import { QueryEditor } from './QueryEditor';
+import { SunAndMoonQuery, SunAndMoonDataSourceOptions } from './types';
 
-class SunAndMoonAnnotationsQueryCtrl {
-  static templateUrl = "partials/annotations.editor.html";
-}
-
-export {
-  SunAndMoonDatasource as Datasource,
-  SunAndMoonDatasourceQueryCtrl as QueryCtrl,
-  SunAndMoonConfigCtrl as ConfigCtrl,
-  SunAndMoonAnnotationsQueryCtrl as AnnotationsQueryCtrl
-};
+export const plugin = new DataSourcePlugin<SunAndMoonDataSource, SunAndMoonQuery, SunAndMoonDataSourceOptions>(
+  SunAndMoonDataSource
+)
+  .setConfigEditor(ConfigEditor)
+  .setQueryEditor(QueryEditor)
+  .setAnnotationQueryCtrl(AnnotationQueryEditor);
