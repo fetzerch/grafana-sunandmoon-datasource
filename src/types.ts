@@ -109,6 +109,7 @@ export interface Position {
 
 export interface SunAndMoonQuery extends DataQuery {
   target?: string;
+  alias?: string;
 }
 
 export const sunAndMoonDefaultQuery: Partial<SunAndMoonQuery> = {
