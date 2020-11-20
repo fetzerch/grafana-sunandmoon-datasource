@@ -9,9 +9,9 @@ import { SunAndMoonDataSourceOptions, SunAndMoonQuery, sunAndMoonDefaultQuery, s
 
 export type Props = QueryEditorProps<SunAndMoonDataSource, SunAndMoonQuery, SunAndMoonDataSourceOptions>;
 
-const metrics = map(sunAndMoonMetrics, (label, metric) => {
-  return { label: label, value: metric };
-});
+const metrics = map(sunAndMoonMetrics, (metric, value) => {
+  return { label: metric.title, value: value, description: metric.text };
+}) as Array<SelectableValue<string>>;
 
 export class QueryEditor extends PureComponent<Props> {
   onMetricChanged = (selected: SelectableValue<string>) => {

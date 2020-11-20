@@ -10,6 +10,13 @@ exports[`Render should render component 1`] = `
     Sun and Moon reference location
   </h3>
   <div
+    className="grafana-info-box"
+  >
+    This datasource calculates sun and moon metrics that are relative to a location on earth.
+    <br />
+    The geographic position is expressed as latitude and longitude in decimal degrees.
+  </div>
+  <div
     className="gf-form"
   >
     <InlineField
@@ -22,10 +29,11 @@ exports[`Render should render component 1`] = `
         max={90}
         min={-90}
         onChange={[Function]}
-        placeholder="latitude"
+        placeholder="48.3984"
         required={true}
         type="number"
         value={48}
+        width={32}
       />
     </InlineField>
   </div>
@@ -42,10 +50,11 @@ exports[`Render should render component 1`] = `
         max={360}
         min={-360}
         onChange={[Function]}
-        placeholder="longitude"
+        placeholder="9.9910"
         required={true}
         type="number"
         value={10}
+        width={32}
       />
     </InlineField>
   </div>

@@ -44,7 +44,7 @@ export class SunAndMoonDataSource extends DataSourceApi<SunAndMoonQuery, SunAndM
     const data = targets.map(target => {
       const frame = new MutableDataFrame({
         refId: target.refId,
-        name: sunAndMoonMetrics[target.target!],
+        name: sunAndMoonMetrics[target.target!].title,
         fields: [
           { name: 'Time', type: FieldType.time },
           { name: 'Value', type: FieldType.number },

@@ -13,26 +13,32 @@ exports[`Render should render component 1`] = `
     options={
       Array [
         Object {
+          "description": "Percentage of the moon illuminated by the sun",
           "label": "Moon illumination",
           "value": "moon_illumination",
         },
         Object {
+          "description": "Height of the moon in the in degrees",
           "label": "Moon altitude",
           "value": "moon_altitude",
         },
         Object {
+          "description": "Direction of the moon along the horizon in degrees",
           "label": "Moon azimuth",
           "value": "moon_azimuth",
         },
         Object {
+          "description": "Distance to the moon in meter",
           "label": "Moon distance",
           "value": "moon_distance",
         },
         Object {
+          "description": "Height of the sun in the in degrees",
           "label": "Sun altitude",
           "value": "sun_altitude",
         },
         Object {
+          "description": "Direction of the sun along the horizon in degrees",
           "label": "Sun azimuth",
           "value": "sun_azimuth",
         },

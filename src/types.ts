@@ -1,12 +1,30 @@
 import { DataQuery, DataSourceJsonData } from '@grafana/data';
 
 export const sunAndMoonMetrics: any = {
-  moon_illumination: 'Moon illumination',
-  moon_altitude: 'Moon altitude',
-  moon_azimuth: 'Moon azimuth',
-  moon_distance: 'Moon distance',
-  sun_altitude: 'Sun altitude',
-  sun_azimuth: 'Sun azimuth',
+  moon_illumination: {
+    title: 'Moon illumination',
+    text: 'Percentage of the moon illuminated by the sun',
+  },
+  moon_altitude: {
+    title: 'Moon altitude',
+    text: 'Height of the moon in the in degrees',
+  },
+  moon_azimuth: {
+    title: 'Moon azimuth',
+    text: 'Direction of the moon along the horizon in degrees',
+  },
+  moon_distance: {
+    title: 'Moon distance',
+    text: 'Distance to the moon in meter',
+  },
+  sun_altitude: {
+    title: 'Sun altitude',
+    text: 'Height of the sun in the in degrees',
+  },
+  sun_azimuth: {
+    title: 'Sun azimuth',
+    text: 'Direction of the sun along the horizon in degrees',
+  },
 };
 
 export const sunAndMoonAnnotations: any = {
