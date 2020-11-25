@@ -1,7 +1,7 @@
 {
   "name": "sunandmoon-datasource",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Calculates position of Sun and Moon.",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@grafana/data": "^7.3.4",
+    "@grafana/runtime": "^7.3.4",
     "@grafana/toolkit": "^7.3.4",
     "@grafana/ui": "^7.3.4",
     "@testing-library/jest-dom": "5.11.6",

@@ -14,8 +14,9 @@ import {
   dateTime,
 } from '@grafana/data';
 
+import { getTemplateSrv } from '@grafana/runtime';
+
 import {
-  Position,
   SunAndMoonQuery,
   SunAndMoonDataSourceOptions,
   sunAndMoonMetrics,
@@ -24,12 +25,14 @@ import {
 } from './types';
 
 export class SunAndMoonDataSource extends DataSourceApi<SunAndMoonQuery, SunAndMoonDataSourceOptions> {
-  position: Position;
+  latitude?: number;
+  longitude?: number;
 
   constructor(instanceSettings: DataSourceInstanceSettings<SunAndMoonDataSourceOptions>) {
     super(instanceSettings);
 
-    this.position = instanceSettings.jsonData;
+    this.latitude = instanceSettings.jsonData.latitude;
+    this.longitude = instanceSettings.jsonData.longitude;
   }
 
   async query(options: DataQueryRequest<SunAndMoonQuery>): Promise<DataQueryResponse> {
@@ -40,6 +43,7 @@ export class SunAndMoonDataSource extends DataSourceApi<SunAndMoonQuery, SunAndM
     const maxDataPoints = options.maxDataPoints!;
     const stepInSeconds = Math.ceil((to - from) / maxDataPoints);
 
+    let errors: string[] = [];
     const targets = options.targets.filter(target => target.target && !target.hide);
     const data = targets.map(target => {
       const frame = new MutableDataFrame({
@@ -50,6 +54,22 @@ export class SunAndMoonDataSource extends DataSourceApi<SunAndMoonQuery, SunAndM
           { name: 'Value', type: FieldType.number },
         ],
       });
+
+      let latitude = this.latitude;
+      if (!!target.latitude) {
+        latitude = parseFloat(getTemplateSrv().replace(target.latitude, options.scopedVars));
+        if (isNaN(latitude) || latitude < -90 || latitude > 90) {
+          errors.push(`Error in query ${target.refId}: Latitude '${latitude}' not in range -+90.`);
+        }
+      }
+      let longitude = this.longitude;
+      if (!!target.longitude) {
+        longitude = parseFloat(getTemplateSrv().replace(target.longitude, options.scopedVars));
+        if (isNaN(longitude) || longitude < -360 || longitude > 360) {
+          errors.push(`Error in query ${target.refId}: Longitude '${longitude}' not in range -+360`);
+        }
+      }
+
       let value = 0;
       for (let time = from; time < to; time += stepInSeconds) {
         switch (target.target!) {
@@ -57,29 +77,19 @@ export class SunAndMoonDataSource extends DataSourceApi<SunAndMoonQuery, SunAndM
             value = SunCalc.getMoonIllumination(new Date(time)).fraction;
             break;
           case 'moon_altitude':
-            value =
-              (SunCalc.getMoonPosition(new Date(time), this.position.latitude!, this.position.longitude!).altitude *
-                180) /
-              Math.PI;
+            value = (SunCalc.getMoonPosition(new Date(time), latitude!, longitude!).altitude * 180) / Math.PI;
             break;
           case 'moon_azimuth':
-            value =
-              (SunCalc.getMoonPosition(new Date(time), this.position.latitude!, this.position.longitude!).azimuth *
-                180) /
-              Math.PI;
+            value = (SunCalc.getMoonPosition(new Date(time), latitude!, longitude!).azimuth * 180) / Math.PI;
             break;
           case 'moon_distance':
-            value = SunCalc.getMoonPosition(new Date(time), this.position.latitude!, this.position.longitude!).distance;
+            value = SunCalc.getMoonPosition(new Date(time), latitude!, longitude!).distance;
             break;
           case 'sun_altitude':
-            value =
-              (SunCalc.getPosition(new Date(time), this.position.latitude!, this.position.longitude!).altitude * 180) /
-              Math.PI;
+            value = (SunCalc.getPosition(new Date(time), latitude!, longitude!).altitude * 180) / Math.PI;
             break;
           case 'sun_azimuth':
-            value =
-              (SunCalc.getPosition(new Date(time), this.position.latitude!, this.position.longitude!).azimuth * 180) /
-              Math.PI;
+            value = (SunCalc.getPosition(new Date(time), latitude!, longitude!).azimuth * 180) / Math.PI;
             break;
         }
         frame.add({ Time: time, Value: value });
@@ -87,7 +97,11 @@ export class SunAndMoonDataSource extends DataSourceApi<SunAndMoonQuery, SunAndM
       return frame;
     });
 
-    return { data };
+    if (errors.length) {
+      throw new Error(errors.join(' '));
+    } else {
+      return { data };
+    }
   }
 
   async annotationQuery(options: AnnotationQueryRequest<SunAndMoonAnnotationQuery>): Promise<AnnotationEvent[]> {
@@ -108,8 +122,8 @@ export class SunAndMoonDataSource extends DataSourceApi<SunAndMoonQuery, SunAndM
     }
 
     for (const date = from; date < to; date.add(1, 'days')) {
-      const sunTimes = SunCalc.getTimes(date.toDate(), this.position.latitude!, this.position.longitude!);
-      const moonTimes = SunCalc.getMoonTimes(date.toDate(), this.position.latitude!, this.position.longitude!);
+      const sunTimes = SunCalc.getTimes(date.toDate(), this.latitude!, this.longitude!);
+      const moonTimes = SunCalc.getMoonTimes(date.toDate(), this.latitude!, this.longitude!);
 
       // Merge sun and moon times (prefix moon times with moon).
       const values = merge(
@@ -149,10 +163,10 @@ export class SunAndMoonDataSource extends DataSourceApi<SunAndMoonQuery, SunAndM
 
   async testDatasource() {
     let errors: string[] = [];
-    if (this.position.latitude === undefined || this.position.latitude < -90 || this.position.latitude > 90) {
+    if (this.latitude === undefined || this.latitude < -90 || this.latitude > 90) {
       errors.push('Latitude not in range -+90.');
     }
-    if (this.position.longitude === undefined || this.position.longitude < -360 || this.position.longitude > 360) {
+    if (this.longitude === undefined || this.longitude < -360 || this.longitude > 360) {
       errors.push('Longitude not in range -+360.');
     }
     if (errors.length) {
