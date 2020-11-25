@@ -120,13 +120,10 @@ export const sunAndMoonAnnotations: any = {
   },
 };
 
-export interface Position {
-  latitude?: number;
-  longitude?: number;
-}
-
 export interface SunAndMoonQuery extends DataQuery {
   target?: string;
+  latitude?: string;
+  longitude?: string;
 }
 
 export const sunAndMoonDefaultQuery: Partial<SunAndMoonQuery> = {
