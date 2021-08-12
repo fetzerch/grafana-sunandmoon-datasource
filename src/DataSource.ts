@@ -28,6 +28,7 @@ export class SunAndMoonDataSource extends DataSourceApi<SunAndMoonQuery, SunAndM
   latitude?: number;
   longitude?: number;
 
+  /* istanbul ignore next: workaround for https://github.com/gotwarlost/istanbul/issues/690 */
   constructor(instanceSettings: DataSourceInstanceSettings<SunAndMoonDataSourceOptions>) {
     super(instanceSettings);
 
@@ -44,8 +45,8 @@ export class SunAndMoonDataSource extends DataSourceApi<SunAndMoonQuery, SunAndM
     const stepInSeconds = Math.ceil((to - from) / maxDataPoints);
 
     let errors: string[] = [];
-    const targets = options.targets.filter(target => target.target && !target.hide);
-    const data = targets.map(target => {
+    const targets = options.targets.filter((target) => target.target && !target.hide);
+    const data = targets.map((target) => {
       const frame = new MutableDataFrame({
         refId: target.refId,
         name: sunAndMoonMetrics[target.target!].title,
@@ -149,7 +150,7 @@ export class SunAndMoonDataSource extends DataSourceApi<SunAndMoonQuery, SunAndM
           continue;
         }
         const event: AnnotationEvent = {
-          time: +values[value].valueOf(),
+          time: +values[value]!.valueOf(),
           title: sunAndMoonAnnotations[value].title,
           text: sunAndMoonAnnotations[value].text,
           tags: sunAndMoonAnnotations[value].tags,

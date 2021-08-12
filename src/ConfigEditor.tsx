@@ -18,7 +18,7 @@ export class ConfigEditor extends PureComponent<Props> {
     const { jsonData } = options;
     if (jsonData.latitude === undefined && jsonData.longitude === undefined) {
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
+        navigator.geolocation.getCurrentPosition((position) => {
           const { onOptionsChange, options } = this.props;
           const jsonData = {
             ...options.jsonData,

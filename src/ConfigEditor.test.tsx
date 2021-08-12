@@ -30,7 +30,7 @@ describe('Render', () => {
     expect(onOptionsChange).not.toHaveBeenCalled();
 
     const mockGeolocation = {
-      getCurrentPosition: jest.fn().mockImplementationOnce(success =>
+      getCurrentPosition: jest.fn().mockImplementationOnce((success) =>
         Promise.resolve(
           success({
             coords: {

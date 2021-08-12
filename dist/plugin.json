@@ -26,7 +26,7 @@
       {"name": "Sun and Moon Position", "path": "img/screenshot.png"}
     ],
     "version": "0.2.1",
-    "updated": "2020-11-27"
+    "updated": "2021-08-14"
   },
   "dependencies": {
     "grafanaDependency": ">=7.0.0",

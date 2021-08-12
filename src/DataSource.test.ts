@@ -34,7 +34,7 @@ describe('SunAndMoonDatasource', () => {
         to: dateTime('2016/06/26', 'YYYY/MM/DD'),
       },
     };
-    return datasource.query(options).then(results => {
+    return datasource.query(options).then((results) => {
       expect(results.data).toHaveLength(0);
     });
   });
@@ -55,7 +55,7 @@ describe('SunAndMoonDatasource', () => {
         to: dateTime('2019/03/27', 'YYYY/MM/DD'),
       },
     } as DataQueryRequest<SunAndMoonQuery>;
-    return datasource.query(options).then(results => {
+    return datasource.query(options).then((results) => {
       expect(results.data).toHaveLength(options.targets.length);
     });
   });
@@ -72,7 +72,7 @@ describe('SunAndMoonDatasource', () => {
         to: dateTime('2019/03/27', 'YYYY/MM/DD'),
       },
     } as DataQueryRequest<SunAndMoonQuery>;
-    return datasource.query(options).then(results => {
+    return datasource.query(options).then((results) => {
       expect(results.data).toHaveLength(1);
     });
   });
@@ -86,7 +86,7 @@ describe('SunAndMoonDatasource', () => {
         to: dateTime('2019/03/27', 'YYYY/MM/DD'),
       },
     } as DataQueryRequest<SunAndMoonQuery>;
-    return datasource.query(options).then(results => {
+    return datasource.query(options).then((results) => {
       expect(results.data).toHaveLength(options.targets.length);
     });
   });
@@ -111,8 +111,8 @@ describe('SunAndMoonDatasource', () => {
         from: dateTime('2019/03/26', 'YYYY/MM/DD'),
         to: dateTime('2019/03/26', 'YYYY/MM/DD'),
       },
-    } as AnnotationQueryRequest<SunAndMoonAnnotationQuery>;
-    return datasource.annotationQuery(options).then(results => {
+    } as unknown as AnnotationQueryRequest<SunAndMoonAnnotationQuery>;
+    return datasource.annotationQuery(options).then((results) => {
       expect(results).toHaveLength(17);
     });
   });
@@ -125,8 +125,8 @@ describe('SunAndMoonDatasource', () => {
         from: dateTime('2019/03/26', 'YYYY/MM/DD'),
         to: dateTime('2019/03/26', 'YYYY/MM/DD'),
       },
-    } as AnnotationQueryRequest<SunAndMoonAnnotationQuery>;
-    return datasource.annotationQuery(options).then(results => {
+    } as unknown as AnnotationQueryRequest<SunAndMoonAnnotationQuery>;
+    return datasource.annotationQuery(options).then((results) => {
       expect(results).toHaveLength(2);
     });
   });
@@ -139,8 +139,8 @@ describe('SunAndMoonDatasource', () => {
         from: dateTime('2016/01/01', 'YYYY/MM/DD'),
         to: dateTime('2019/12/31', 'YYYY/MM/DD'),
       },
-    } as AnnotationQueryRequest<SunAndMoonAnnotationQuery>;
-    return datasource.annotationQuery(options).then(results => {
+    } as unknown as AnnotationQueryRequest<SunAndMoonAnnotationQuery>;
+    return datasource.annotationQuery(options).then((results) => {
       expect(results).toHaveLength(0);
     });
   });
@@ -153,8 +153,8 @@ describe('SunAndMoonDatasource', () => {
         from: dateTime('2019/03/26', 'YYYY/MM/DD'),
         to: dateTime('2019/03/26', 'YYYY/MM/DD'),
       },
-    } as AnnotationQueryRequest<SunAndMoonAnnotationQuery>;
-    return datasource.annotationQuery(options).then(results => {
+    } as unknown as AnnotationQueryRequest<SunAndMoonAnnotationQuery>;
+    return datasource.annotationQuery(options).then((results) => {
       expect(results).toHaveLength(17);
     });
   });
@@ -162,7 +162,7 @@ describe('SunAndMoonDatasource', () => {
   it('testDatasource should return success for valid gps position', () => {
     datasource.latitude = 0;
     datasource.longitude = 0;
-    return datasource.testDatasource().then(results => {
+    return datasource.testDatasource().then((results) => {
       expect(results).toMatchObject({ status: 'success' });
     });
   });
@@ -170,7 +170,7 @@ describe('SunAndMoonDatasource', () => {
   it('testDatasource should return error if latitude < -90', () => {
     datasource.latitude = -91;
     datasource.longitude = 0;
-    return datasource.testDatasource().then(results => {
+    return datasource.testDatasource().then((results) => {
       expect(results).toMatchObject({ status: 'error' });
     });
   });
@@ -178,7 +178,7 @@ describe('SunAndMoonDatasource', () => {
   it('testDatasource should return error if latitude > -90', () => {
     datasource.latitude = 91;
     datasource.longitude = 0;
-    return datasource.testDatasource().then(results => {
+    return datasource.testDatasource().then((results) => {
       expect(results).toMatchObject({ status: 'error' });
     });
   });
@@ -186,7 +186,7 @@ describe('SunAndMoonDatasource', () => {
   it('testDatasource should return error if longitude < -360', () => {
     datasource.latitude = 0;
     datasource.longitude = -361;
-    return datasource.testDatasource().then(results => {
+    return datasource.testDatasource().then((results) => {
       expect(results).toMatchObject({ status: 'error' });
     });
   });
@@ -194,7 +194,7 @@ describe('SunAndMoonDatasource', () => {
   it('testDatasource should return error if longitude > 360', () => {
     datasource.latitude = 0;
     datasource.longitude = 361;
-    return datasource.testDatasource().then(results => {
+    return datasource.testDatasource().then((results) => {
       expect(results).toMatchObject({ status: 'error' });
     });
   });
