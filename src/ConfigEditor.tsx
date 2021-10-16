@@ -2,7 +2,6 @@ import React, { ChangeEvent, PureComponent } from 'react';
 import { InlineField, Input } from '@grafana/ui';
 import { DataSourcePluginOptionsEditorProps } from '@grafana/data';
 import { SunAndMoonDataSourceOptions } from './types';
-import {} from '@emotion/core';
 
 export interface Props extends DataSourcePluginOptionsEditorProps<SunAndMoonDataSourceOptions> {}
 
