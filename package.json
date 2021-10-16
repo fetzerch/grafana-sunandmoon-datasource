@@ -30,27 +30,26 @@
     ]
   },
   "devDependencies": {
-    "@grafana/data": "8.0.2",
-    "@grafana/runtime": "8.0.2",
-    "@grafana/toolkit": "8.0.2",
-    "@grafana/ui": "8.0.2",
+    "@grafana/data": "8.2.1",
+    "@grafana/runtime": "8.2.1",
+    "@grafana/toolkit": "8.2.0",
+    "@grafana/ui": "8.2.1",
     "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^12.0.0",
+    "@testing-library/react": "^12.1.2",
     "@types/enzyme": "^3.10.9",
-    "@types/lodash": "^4.14.0",
+    "@types/lodash": "^4.14.175",
     "@types/suncalc": "^1.8.1",
-    "@emotion/core": "^10.1.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "enzyme-to-json": "^3.6.2",
-    "markdownlint": "^0.23.1",
-    "markdownlint-cli": "^0.28.1"
+    "markdownlint": "^0.24.0",
+    "markdownlint-cli": "^0.29.0"
   },
   "dependencies": {
     "suncalc": "^1.8.0"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "homepage": "https://github.com/fetzerch/grafana-sunandmoon-datasource"
 }

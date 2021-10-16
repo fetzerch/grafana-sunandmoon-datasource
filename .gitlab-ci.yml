@@ -1,5 +1,5 @@
 test:
-  image: node:12
+  image: node:14
   before_script:
     - npm config set cache "$(pwd)/.npm"
     - npm install
