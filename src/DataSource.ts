@@ -77,6 +77,9 @@ export class SunAndMoonDataSource extends DataSourceApi<SunAndMoonQuery, SunAndM
           case 'moon_illumination':
             value = SunCalc.getMoonIllumination(new Date(time)).fraction;
             break;
+          case 'moon_phase':
+            value = SunCalc.getMoonIllumination(new Date(time)).phase;
+            break;
           case 'moonrise': {
             let tmp = SunCalc.getMoonTimes(new Date(time), latitude!, longitude!).rise;
             value = tmp ? tmp.getTime() % (60 * 60 * 24 * 1000) : 0;

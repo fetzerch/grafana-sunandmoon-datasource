@@ -46,6 +46,11 @@ exports[`Render should render component 1`] = `
             "value": "moon_illumination",
           },
           Object {
+            "description": "Moon phase (0 is New Moon, 0.25 is First Quarter, 0.5 is Full Moon, 0.75 is Last Quarter)",
+            "label": "Moon phase",
+            "value": "moon_phase",
+          },
+          Object {
             "description": "Height of the moon in degrees (-90-90)",
             "label": "Moon altitude",
             "value": "moon_altitude",

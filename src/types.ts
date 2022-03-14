@@ -25,6 +25,10 @@ export const sunAndMoonMetrics: any = {
     title: 'Moon illumination',
     text: 'Percentage of the moon illuminated by the sun (0.0-1.0)',
   },
+  moon_phase: {
+    title: 'Moon phase',
+    text: 'Moon phase (0 is New Moon, 0.25 is First Quarter, 0.5 is Full Moon, 0.75 is Last Quarter)',
+  },
   moon_altitude: {
     title: 'Moon altitude',
     text: 'Height of the moon in degrees (-90-90)',
