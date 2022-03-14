@@ -77,11 +77,30 @@ export class SunAndMoonDataSource extends DataSourceApi<SunAndMoonQuery, SunAndM
           case 'moon_illumination':
             value = SunCalc.getMoonIllumination(new Date(time)).fraction;
             break;
+          case 'moonrise': {
+            let tmp = SunCalc.getMoonTimes(new Date(time), latitude!, longitude!).rise;
+            value = tmp ? tmp.getTime() % (60 * 60 * 24 * 1000) : 0;
+            break;
+          }
+          case 'moonset': {
+            let tmp = SunCalc.getMoonTimes(new Date(time), latitude!, longitude!).set;
+            value = tmp ? tmp.getTime() % (60 * 60 * 24 * 1000) : 0;
+            break;
+          }
+          case 'solar_noon':
+            value = SunCalc.getTimes(new Date(time), latitude!, longitude!).solarNoon.getTime() % (60 * 60 * 24 * 1000);
+            break;
+          case 'sunrise':
+            value = SunCalc.getTimes(new Date(time), latitude!, longitude!).sunrise.getTime() % (60 * 60 * 24 * 1000);
+            break;
+          case 'sunset':
+            value = SunCalc.getTimes(new Date(time), latitude!, longitude!).sunset.getTime() % (60 * 60 * 24 * 1000);
+            break;
           case 'moon_altitude':
             value = (SunCalc.getMoonPosition(new Date(time), latitude!, longitude!).altitude * 180) / Math.PI;
             break;
           case 'moon_azimuth':
-            value = (SunCalc.getMoonPosition(new Date(time), latitude!, longitude!).azimuth * 180) / Math.PI;
+            value = (SunCalc.getMoonPosition(new Date(time), latitude!, longitude!).azimuth * 180) / Math.PI + 180;
             break;
           case 'moon_distance':
             value = SunCalc.getMoonPosition(new Date(time), latitude!, longitude!).distance;
@@ -90,7 +109,7 @@ export class SunAndMoonDataSource extends DataSourceApi<SunAndMoonQuery, SunAndM
             value = (SunCalc.getPosition(new Date(time), latitude!, longitude!).altitude * 180) / Math.PI;
             break;
           case 'sun_azimuth':
-            value = (SunCalc.getPosition(new Date(time), latitude!, longitude!).azimuth * 180) / Math.PI;
+            value = (SunCalc.getPosition(new Date(time), latitude!, longitude!).azimuth * 180) / Math.PI + 180;
             break;
         }
         frame.add({ Time: time, Value: value });

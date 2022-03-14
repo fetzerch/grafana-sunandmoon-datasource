@@ -1,17 +1,37 @@
 import { DataQuery, DataSourceJsonData } from '@grafana/data';
 
 export const sunAndMoonMetrics: any = {
+  moonrise: {
+    title: 'Moonrise',
+    text: 'The time of the moon rising',
+  },
+  moonset: {
+    title: 'Moonset',
+    text: 'The time of the moon setting',
+  },
+  solar_noon: {
+    title: 'Solar Noon',
+    text: 'The time of solar noon',
+  },
+  sunrise: {
+    title: 'Sunrise',
+    text: 'The time of sunrise',
+  },
+  sunset: {
+    title: 'Sunset',
+    text: 'Time of sunset',
+  },
   moon_illumination: {
     title: 'Moon illumination',
-    text: 'Percentage of the moon illuminated by the sun',
+    text: 'Percentage of the moon illuminated by the sun (0.0-1.0)',
   },
   moon_altitude: {
     title: 'Moon altitude',
-    text: 'Height of the moon in the in degrees',
+    text: 'Height of the moon in degrees (-90-90)',
   },
   moon_azimuth: {
     title: 'Moon azimuth',
-    text: 'Direction of the moon along the horizon in degrees',
+    text: 'Direction of the moon along the horizon in degrees (0-360)',
   },
   moon_distance: {
     title: 'Moon distance',
@@ -19,11 +39,11 @@ export const sunAndMoonMetrics: any = {
   },
   sun_altitude: {
     title: 'Sun altitude',
-    text: 'Height of the sun in the in degrees',
+    text: 'Height of the sun in degrees (-90-90)',
   },
   sun_azimuth: {
     title: 'Sun azimuth',
-    text: 'Direction of the sun along the horizon in degrees',
+    text: 'Direction of the sun along the horizon in degrees (0-360)',
   },
 };
 

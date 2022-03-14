@@ -16,17 +16,42 @@ exports[`Render should render component 1`] = `
       options={
         Array [
           Object {
-            "description": "Percentage of the moon illuminated by the sun",
+            "description": "The time of the moon rising",
+            "label": "Moonrise",
+            "value": "moonrise",
+          },
+          Object {
+            "description": "The time of the moon setting",
+            "label": "Moonset",
+            "value": "moonset",
+          },
+          Object {
+            "description": "The time of solar noon",
+            "label": "Solar Noon",
+            "value": "solar_noon",
+          },
+          Object {
+            "description": "The time of sunrise",
+            "label": "Sunrise",
+            "value": "sunrise",
+          },
+          Object {
+            "description": "Time of sunset",
+            "label": "Sunset",
+            "value": "sunset",
+          },
+          Object {
+            "description": "Percentage of the moon illuminated by the sun (0.0-1.0)",
             "label": "Moon illumination",
             "value": "moon_illumination",
           },
           Object {
-            "description": "Height of the moon in the in degrees",
+            "description": "Height of the moon in degrees (-90-90)",
             "label": "Moon altitude",
             "value": "moon_altitude",
           },
           Object {
-            "description": "Direction of the moon along the horizon in degrees",
+            "description": "Direction of the moon along the horizon in degrees (0-360)",
             "label": "Moon azimuth",
             "value": "moon_azimuth",
           },
@@ -36,12 +61,12 @@ exports[`Render should render component 1`] = `
             "value": "moon_distance",
           },
           Object {
-            "description": "Height of the sun in the in degrees",
+            "description": "Height of the sun in degrees (-90-90)",
             "label": "Sun altitude",
             "value": "sun_altitude",
           },
           Object {
-            "description": "Direction of the sun along the horizon in degrees",
+            "description": "Direction of the sun along the horizon in degrees (0-360)",
             "label": "Sun azimuth",
             "value": "sun_azimuth",
           },
