@@ -1,7 +1,7 @@
-import * as module from './module';
+import { plugin } from './module';
 
 describe('SunAndMoonModule', () => {
   it('module should export plugin', () => {
-    expect(module.plugin).toBeDefined();
+    expect(plugin).toBeDefined();
   });
 });

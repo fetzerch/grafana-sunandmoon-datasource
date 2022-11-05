@@ -1,11 +1,10 @@
 {
+  "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
   "name": "Sun and Moon",
   "id": "fetzerch-sunandmoon-datasource",
   "type": "datasource",
-
   "metrics": true,
   "annotations": true,
-
   "info": {
     "description": "Calculates position of Sun and Moon.",
     "author": {
@@ -13,17 +12,33 @@
       "email": "fetzer.ch@gmail.com",
       "url": "https://fetzerch.github.io"
     },
-    "keywords": ["sun", "moon", "altitude", "azimuth", "illumination", "distance"],
+    "keywords": [
+      "sun",
+      "moon",
+      "altitude",
+      "azimuth",
+      "illumination",
+      "distance"
+    ],
     "logos": {
       "small": "img/logo.png",
       "large": "img/logo.png"
     },
     "links": [
-      {"name": "GitHub", "url": "https://github.com/fetzerch/grafana-sunandmoon-datasource"},
-      {"name": "MIT License", "url": "https://github.com/fetzerch/grafana-sunandmoon-datasource/blob/master/LICENSE"}
+      {
+        "name": "GitHub",
+        "url": "https://github.com/fetzerch/grafana-sunandmoon-datasource"
+      },
+      {
+        "name": "MIT License",
+        "url": "https://github.com/fetzerch/grafana-sunandmoon-datasource/blob/master/LICENSE"
+      }
     ],
     "screenshots": [
-      {"name": "Sun and Moon Position", "path": "img/screenshot.png"}
+      {
+        "name": "Sun and Moon Position",
+        "path": "img/screenshot.png"
+      }
     ],
     "version": "%VERSION%",
     "updated": "%TODAY%"

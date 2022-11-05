@@ -9,6 +9,7 @@
     "dev": "grafana-toolkit plugin:dev",
     "watch": "grafana-toolkit plugin:dev --watch",
     "sign": "grafana-toolkit plugin:sign",
+    "start": "yarn watch",
     "markdownlint": "markdownlint *.md dev-env/*.md"
   },
   "repository": {
@@ -24,29 +25,22 @@
   "bugs": {
     "url": "https://github.com/fetzerch/grafana-sunandmoon-datasource/issues"
   },
-  "jest": {
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ]
-  },
   "devDependencies": {
-    "@grafana/data": "8.2.1",
-    "@grafana/runtime": "8.2.1",
-    "@grafana/toolkit": "8.2.0",
-    "@grafana/ui": "8.2.1",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^12.1.2",
-    "@types/enzyme": "^3.10.9",
-    "@types/lodash": "^4.14.175",
+    "@grafana/runtime": "9.2.3",
+    "@grafana/toolkit": "9.2.3",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@types/lodash": "^4.14.188",
     "@types/suncalc": "^1.8.1",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.6",
-    "enzyme-to-json": "^3.6.2",
-    "markdownlint": "^0.24.0",
-    "markdownlint-cli": "^0.29.0"
+    "markdownlint": "^0.26.2",
+    "markdownlint-cli": "^0.32.2"
   },
   "dependencies": {
-    "suncalc": "^1.8.0"
+    "@grafana/data": "9.2.3",
+    "@grafana/ui": "9.2.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "suncalc": "^1.9.0"
   },
   "engines": {
     "node": ">=14"
