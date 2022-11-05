@@ -3,7 +3,7 @@ import { InlineField, Input } from '@grafana/ui';
 import { DataSourcePluginOptionsEditorProps } from '@grafana/data';
 import { SunAndMoonDataSourceOptions } from './types';
 
-export interface Props extends DataSourcePluginOptionsEditorProps<SunAndMoonDataSourceOptions> {}
+export interface Props extends DataSourcePluginOptionsEditorProps<SunAndMoonDataSourceOptions> { }
 
 export class ConfigEditor extends PureComponent<Props> {
   constructor(props: Props) {
@@ -66,7 +66,7 @@ export class ConfigEditor extends PureComponent<Props> {
           <InlineField label="Latitude" labelWidth={14}>
             <Input
               className="latitude"
-              label="Latitude"
+              aria-label="Latitude"
               onChange={this.onLatitudeChange}
               value={jsonData.latitude}
               placeholder="48.3984"
@@ -82,7 +82,7 @@ export class ConfigEditor extends PureComponent<Props> {
           <InlineField label="Longitude" labelWidth={14}>
             <Input
               className="longitude"
-              label="Longitude"
+              aria-label="Longitude"
               onChange={this.onLongitudeChange}
               value={jsonData.longitude}
               placeholder="9.9910"

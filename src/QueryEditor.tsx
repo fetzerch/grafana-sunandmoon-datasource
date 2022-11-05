@@ -39,9 +39,10 @@ export class QueryEditor extends PureComponent<Props> {
     return (
       <div className="gf-form-group">
         <div className="gf-form">
-          <InlineFormLabel>Metric</InlineFormLabel>
+          <InlineFormLabel htmlFor="Metric">Metric</InlineFormLabel>
           <Select
             className="metric"
+            inputId="Metric"
             options={metrics}
             value={query.target}
             onChange={this.onMetricChanged}
@@ -52,7 +53,7 @@ export class QueryEditor extends PureComponent<Props> {
           <InlineField label="Override Latitude" labelWidth={20}>
             <Input
               className="latitude"
-              label="Latitude"
+              aria-label="Latitude"
               onChange={this.onLatitudeChange}
               value={query.latitude}
               placeholder={datasource.latitude!.toString()}
@@ -62,7 +63,7 @@ export class QueryEditor extends PureComponent<Props> {
           <InlineField label="Override Longitude" labelWidth={20}>
             <Input
               className="longitude"
-              label="Longitude"
+              aria-label="Longitude"
               onChange={this.onLongitudeChange}
               value={query.longitude}
               placeholder={datasource.longitude!.toString()}
