@@ -1,5 +1,4 @@
 import { DataSourcePlugin } from '@grafana/data';
-import { AnnotationQueryEditor } from './AnnotationQueryEditor';
 import { SunAndMoonDataSource } from './DataSource';
 import { ConfigEditor } from './ConfigEditor';
 import { QueryEditor } from './QueryEditor';
@@ -10,4 +9,3 @@ export const plugin = new DataSourcePlugin<SunAndMoonDataSource, SunAndMoonQuery
 )
   .setConfigEditor(ConfigEditor)
   .setQueryEditor(QueryEditor)
-  .setAnnotationQueryCtrl(AnnotationQueryEditor);

@@ -14,150 +14,664 @@
         "datasource": "sunandmoon",
         "enable": true,
         "iconColor": "rgb(238, 139, 9)",
+        "mappings": {},
         "name": "Sunrise / Sunset",
-        "query": "sunrise,sunset"
-      },
-      {
-        "datasource": "sunandmoon",
-        "enable": false,
-        "iconColor": "rgba(255, 96, 96, 1)",
-        "name": "Noon",
-        "query": "solarNoon"
+        "target": {
+          "refId": "annotation_query",
+          "target": [
+            "sunrise",
+            "sunset"
+          ]
+        }
       },
       {
         "datasource": "sunandmoon",
         "enable": false,
         "iconColor": "rgb(21, 101, 224)",
+        "mappings": {},
         "name": "Moonrise / Moonset",
-        "query": "moonrise,moonset"
+        "target": {
+          "refId": "annotation_query",
+          "target": [
+            "moonrise",
+            "moonset"
+          ]
+        }
       },
       {
         "datasource": "sunandmoon",
         "enable": false,
         "iconColor": "rgb(98, 164, 0)",
+        "mappings": {},
         "name": "Golden Hour",
-        "query": "goldenHour"
+        "target": {
+          "refId": "annotation_query",
+          "target": [
+            "goldenHour"
+          ]
+        }
       },
       {
         "datasource": "sunandmoon",
         "enable": true,
-        "iconColor": "rgb(21, 14, 120)",
+        "iconColor": "text",
+        "mappings": {},
         "name": "Noon / Midnight",
-        "query": "noon,midnight"
+        "target": {
+          "refId": "annotation_query",
+          "target": [
+            "noon",
+            "midnight"
+          ]
+        }
       }
     ]
   },
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 9,
+  "id": 1,
   "links": [],
   "panels": [
     {
-      "aliasColors": {
-        "Moon altitude": "#447EBC",
-        "Sun altitude": "#CCA300"
-      },
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": "sunandmoon",
-      "editable": true,
-      "error": false,
-      "fill": 0,
-      "grid": {},
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "super-light-orange",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "time: HH:mm"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 0,
+        "y": 0
+      },
+      "id": 5,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Time$/",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.0.0",
+      "targets": [
+        {
+          "refId": "A",
+          "target": [
+            "sunrise"
+          ]
+        }
+      ],
+      "title": "Sunrise",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": "sunandmoon",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "light-yellow",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "time: HH:mm"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 3,
+        "y": 0
+      },
+      "id": 7,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Time$/",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.0.0",
+      "targets": [
+        {
+          "refId": "A",
+          "target": [
+            "solarNoon"
+          ]
+        }
+      ],
+      "title": "Solar noon",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": "-- Mixed --",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "light-red",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "time: HH:mm"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 6,
+        "y": 0
+      },
+      "id": 6,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Time$/",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.0.0",
+      "targets": [
+        {
+          "datasource": "sunandmoon",
+          "refId": "A",
+          "target": [
+            "sunset"
+          ]
+        }
+      ],
+      "title": "Sunset",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": "sunandmoon",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "light-yellow",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 9,
+        "y": 0
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.0.0",
+      "targets": [
+        {
+          "refId": "A",
+          "target": [
+            "sun_azimuth"
+          ]
+        }
+      ],
+      "title": "Sun Azimuth",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": "sunandmoon",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "dark-blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 12,
+        "y": 0
+      },
+      "id": 3,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": false,
+        "text": {}
+      },
+      "pluginVersion": "8.0.0",
+      "targets": [
+        {
+          "refId": "A",
+          "target": [
+            "moon_illumination"
+          ]
+        }
+      ],
+      "title": "Moon illumination",
+      "type": "gauge"
+    },
+    {
+      "datasource": "sunandmoon",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "light-blue",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "time: HH:mm"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 15,
+        "y": 0
+      },
+      "id": 9,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Time$/",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.0.0",
+      "targets": [
+        {
+          "refId": "A",
+          "target": [
+            "moonrise"
+          ]
+        }
+      ],
+      "title": "Moonrise",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": "sunandmoon",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "semi-dark-blue",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "time: HH:mm"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 18,
+        "y": 0
+      },
+      "id": 10,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Time$/",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.0.0",
+      "targets": [
+        {
+          "refId": "A",
+          "target": [
+            "moonset"
+          ]
+        }
+      ],
+      "title": "Moonrise",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": "sunandmoon",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 21,
+        "y": 0
+      },
+      "id": 11,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.0.0",
+      "targets": [
+        {
+          "refId": "A",
+          "target": [
+            "moon_azimuth"
+          ]
+        }
+      ],
+      "title": "Moon Azimuth",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": "sunandmoon",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "degree"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Moon altitude"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#447EBC",
+                  "mode": "fixed",
+                  "seriesBy": "min"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sun altitude"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#CCA300",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Moon illumination"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
       "gridPos": {
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 0
+        "y": 3
       },
       "id": 1,
-      "isNew": true,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
       "links": [],
-      "nullPointMode": "connected",
-      "paceLength": 10,
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [
-        {
-          "alias": "Moon illumination",
-          "yaxis": 2
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
         }
-      ],
-      "stack": false,
-      "steppedLine": false,
+      },
+      "pluginVersion": "9.2.3",
       "targets": [
         {
           "refId": "A",
-          "target": "sun_altitude"
+          "target": [
+            "sun_altitude"
+          ]
         },
         {
           "refId": "B",
-          "target": "moon_altitude"
+          "target": [
+            "moon_altitude"
+          ]
         },
         {
           "refId": "C",
-          "target": "moon_illumination"
+          "target": [
+            "moon_illumination"
+          ]
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
       "title": "Sun & Moon Position",
-      "tooltip": {
-        "msResolution": true,
-        "shared": true,
-        "sort": 0,
-        "value_type": "cumulative"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": "",
-          "logBase": 1,
-          "max": null,
-          "min": 0,
-          "show": true
-        },
-        {
-          "format": "percentunit",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": 0,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     }
   ],
-  "schemaVersion": 18,
+  "schemaVersion": 30,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -195,5 +709,5 @@
   "timezone": "browser",
   "title": "Sun and Moon Datasource",
   "uid": "000000009",
-  "version": 2
+  "version": 3
 }

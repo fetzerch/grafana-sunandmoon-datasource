@@ -1,14 +1,11 @@
-import mapKeys from 'lodash/mapKeys';
-import merge from 'lodash/merge';
 import * as SunCalc from 'suncalc';
 
 import {
-  AnnotationEvent,
-  AnnotationQueryRequest,
   DataQueryRequest,
   DataQueryResponse,
   DataSourceApi,
   DataSourceInstanceSettings,
+  dateTimeParse,
   FieldType,
   MutableDataFrame,
   dateTime,
@@ -21,8 +18,9 @@ import {
   SunAndMoonDataSourceOptions,
   sunAndMoonMetrics,
   sunAndMoonAnnotations,
-  SunAndMoonAnnotationQuery,
 } from './types';
+
+import { migrateQuery } from 'migrations';
 
 export class SunAndMoonDataSource extends DataSourceApi<SunAndMoonQuery, SunAndMoonDataSourceOptions> {
   latitude?: number;
@@ -34,28 +32,17 @@ export class SunAndMoonDataSource extends DataSourceApi<SunAndMoonQuery, SunAndM
 
     this.latitude = instanceSettings.jsonData.latitude;
     this.longitude = instanceSettings.jsonData.longitude;
+    this.annotations = {}
   }
 
   async query(options: DataQueryRequest<SunAndMoonQuery>): Promise<DataQueryResponse> {
     const { range } = options;
-    const from = range!.from.valueOf();
-    const to = range!.to.valueOf();
-
-    const maxDataPoints = options.maxDataPoints!;
-    const stepInSeconds = Math.ceil((to - from) / maxDataPoints);
 
     let errors: string[] = [];
-    const targets = options.targets.filter((target) => target.target && !target.hide);
-    const data = targets.map((target) => {
-      const frame = new MutableDataFrame({
-        refId: target.refId,
-        name: sunAndMoonMetrics[target.target!].title,
-        fields: [
-          { name: 'Time', type: FieldType.time },
-          { name: 'Value', type: FieldType.number },
-        ],
-      });
+    const targets = options.targets.filter((target) => !target.hide);
 
+    let frames: MutableDataFrame[] = [];
+    for (const target of targets) {
       let latitude = this.latitude;
       if (!!target.latitude) {
         latitude = parseFloat(getTemplateSrv().replace(target.latitude, options.scopedVars));
@@ -71,95 +58,140 @@ export class SunAndMoonDataSource extends DataSourceApi<SunAndMoonQuery, SunAndM
         }
       }
 
-      let value = 0;
-      for (let time = from; time < to; time += stepInSeconds) {
-        switch (target.target!) {
-          case 'moon_illumination':
-            value = SunCalc.getMoonIllumination(new Date(time)).fraction;
-            break;
-          case 'moon_altitude':
-            value = (SunCalc.getMoonPosition(new Date(time), latitude!, longitude!).altitude * 180) / Math.PI;
-            break;
-          case 'moon_azimuth':
-            value = (SunCalc.getMoonPosition(new Date(time), latitude!, longitude!).azimuth * 180) / Math.PI;
-            break;
-          case 'moon_distance':
-            value = SunCalc.getMoonPosition(new Date(time), latitude!, longitude!).distance;
-            break;
-          case 'sun_altitude':
-            value = (SunCalc.getPosition(new Date(time), latitude!, longitude!).altitude * 180) / Math.PI;
-            break;
-          case 'sun_azimuth':
-            value = (SunCalc.getPosition(new Date(time), latitude!, longitude!).azimuth * 180) / Math.PI;
-            break;
+      migrateQuery(target);
+
+      const metrics = target.target!.filter((target) => target in sunAndMoonMetrics);
+      const annotations = target.target!.filter((target) => target in sunAndMoonAnnotations);
+
+      if (metrics.length) {
+        for (const metric of metrics) {
+          const frame = new MutableDataFrame({
+            refId: target.refId,
+            name: sunAndMoonMetrics[metric].title,
+            fields: [
+              { name: 'Time', type: FieldType.time },
+              { name: 'Value', type: FieldType.number, config: sunAndMoonMetrics[metric].config },
+            ],
+          });
+          let value = undefined;
+          for (let time = range.from.valueOf(); time < range.to.valueOf(); time += options.intervalMs) {
+            switch (metric) {
+              case 'moon_illumination':
+                value = SunCalc.getMoonIllumination(new Date(time)).fraction;
+                break;
+              case 'moon_altitude':
+                value = (SunCalc.getMoonPosition(new Date(time), latitude!, longitude!).altitude * 180) / Math.PI;
+                break;
+              case 'moon_azimuth':
+                value = (SunCalc.getMoonPosition(new Date(time), latitude!, longitude!).azimuth * 180) / Math.PI + 180;
+                break;
+              case 'moon_distance':
+                value = SunCalc.getMoonPosition(new Date(time), latitude!, longitude!).distance;
+                break;
+              case 'sun_altitude':
+                value = (SunCalc.getPosition(new Date(time), latitude!, longitude!).altitude * 180) / Math.PI;
+                break;
+              case 'sun_azimuth':
+                value = (SunCalc.getPosition(new Date(time), latitude!, longitude!).azimuth * 180) / Math.PI + 180;
+                break;
+            }
+            if (value !== undefined) {
+              frame.add({ Time: time, Value: value });
+            }
+          }
+          frames.push(frame);
         }
-        frame.add({ Time: time, Value: value });
       }
-      return frame;
-    });
+      if (annotations.length) {
+        for (const annotation of annotations) {
+          const frame = new MutableDataFrame({
+            refId: target.refId,
+            name: sunAndMoonAnnotations[annotation].title,
+            fields: [
+              { name: 'Time', type: FieldType.time },
+              { name: 'Title', type: FieldType.string },
+              { name: 'Text', type: FieldType.string },
+              { name: 'Tags', type: FieldType.other },
+            ],
+          });
+
+          for (const date = dateTime(range.from.valueOf()); date < dateTime(range.to.valueOf()).add(1, 'days'); date.add(1, 'days')) {
+            let time = undefined;
+            switch (annotation) {
+              case 'sunrise':
+                time = SunCalc.getTimes(date.toDate(), latitude!, longitude!).sunrise;
+                break;
+              case 'sunriseEnd':
+                time = SunCalc.getTimes(date.toDate(), latitude!, longitude!).sunriseEnd;
+                break;
+              case 'goldenHour':
+                time = SunCalc.getTimes(date.toDate(), latitude!, longitude!).goldenHour;
+                break;
+              case 'goldenHourEnd':
+                time = SunCalc.getTimes(date.toDate(), latitude!, longitude!).goldenHourEnd;
+                break;
+              case 'solarNoon':
+                time = SunCalc.getTimes(date.toDate(), latitude!, longitude!).solarNoon;
+                break;
+              case 'sunsetStart':
+                time = SunCalc.getTimes(date.toDate(), latitude!, longitude!).sunsetStart;
+                break;
+              case 'sunset':
+                time = SunCalc.getTimes(date.toDate(), latitude!, longitude!).sunset;
+                break;
+              case 'dusk':
+                time = SunCalc.getTimes(date.toDate(), latitude!, longitude!).dusk;
+                break;
+              case 'nauticalDusk':
+                time = SunCalc.getTimes(date.toDate(), latitude!, longitude!).nauticalDusk;
+                break;
+              case 'nauticalDawn':
+                time = SunCalc.getTimes(date.toDate(), latitude!, longitude!).nauticalDawn;
+                break;
+              case 'night':
+                time = SunCalc.getTimes(date.toDate(), latitude!, longitude!).night;
+                break;
+              case 'nightEnd':
+                time = SunCalc.getTimes(date.toDate(), latitude!, longitude!).nightEnd;
+                break;
+              case 'nadir':
+                time = SunCalc.getTimes(date.toDate(), latitude!, longitude!).nadir;
+                break;
+              case 'dawn':
+                time = SunCalc.getTimes(date.toDate(), latitude!, longitude!).dawn;
+                break;
+              case 'moonrise':
+                time = SunCalc.getMoonTimes(date.toDate(), latitude!, longitude!).rise;
+                break;
+              case 'moonset':
+                time = SunCalc.getMoonTimes(date.toDate(), latitude!, longitude!).set;
+                break;
+              case 'noon':
+                time = dateTimeParse(`${date.format("YYYY-MM-DD")} 12:00:00`, { timeZone: options.timezone });
+                break;
+              case 'midnight':
+                time = dateTimeParse(`${date.format("YYYY-MM-DD")} 00:00:00`, { timeZone: options.timezone });
+                break;
+            }
+            if (time !== undefined) {
+              frame.add({
+                Time: time!.valueOf(),
+                Title: sunAndMoonAnnotations[annotation].title,
+                Text: sunAndMoonAnnotations[annotation].text,
+                Tags: sunAndMoonAnnotations[annotation].tags,
+              });
+            }
+          }
+          frames.push(frame);
+        }
+      }
+    }
 
     if (errors.length) {
       throw new Error(errors.join(' '));
     } else {
-      return { data };
+      return { data: frames };
     }
-  }
-
-  async annotationQuery(options: AnnotationQueryRequest<SunAndMoonAnnotationQuery>): Promise<AnnotationEvent[]> {
-    const { range } = options;
-    const from = dateTime(range.from);
-    const to = dateTime(range.to).add(1, 'days');
-
-    const events: AnnotationEvent[] = [];
-
-    // Dashboards won't really be able to show huge amount of annotations.
-    if (to.diff(from, 'years') > 1) {
-      return events;
-    }
-
-    let targets = ['*'];
-    if (options.annotation.query !== undefined) {
-      targets = options.annotation.query.split(/\s*[\s,]\s*/);
-    }
-
-    for (const date = from; date < to; date.add(1, 'days')) {
-      const sunTimes = SunCalc.getTimes(date.toDate(), this.latitude!, this.longitude!);
-      const moonTimes = SunCalc.getMoonTimes(date.toDate(), this.latitude!, this.longitude!);
-
-      // Merge sun and moon times (prefix moon times with moon).
-      const values = merge(
-        {},
-        sunTimes,
-        mapKeys(moonTimes, (value, key) => 'moon' + key)
-      );
-
-      // Add noon and midnight.
-      let setHours = Date.prototype.setHours;
-      if (options.dashboard !== undefined && options.dashboard.getTimezone() === 'utc') {
-        setHours = Date.prototype.setUTCHours;
-      }
-      const noon = date.toDate();
-      setHours.call(noon, 12, 0, 0);
-      values.noon = noon;
-      const midnight = date.toDate();
-      setHours.call(midnight, 0, 0, 0);
-      values.midnight = midnight;
-
-      for (const value in values) {
-        if (!targets.includes('*') && targets.indexOf(value) < 0) {
-          continue;
-        }
-        const event: AnnotationEvent = {
-          time: +values[value]!.valueOf(),
-          title: sunAndMoonAnnotations[value].title,
-          text: sunAndMoonAnnotations[value].text,
-          tags: sunAndMoonAnnotations[value].tags,
-        };
-        events.push(event);
-      }
-    }
-
-    return events;
   }
 
   async testDatasource() {
