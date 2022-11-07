@@ -11,7 +11,7 @@ describe('QueryEditor', () => {
     props = {
       query: {
         refId: 'test',
-        target: 'sun_altitude',
+        target: ['sun_altitude'],
         latitude: '',
         longitude: '',
       },
@@ -33,8 +33,9 @@ describe('QueryEditor', () => {
 
     const metricSelect = await screen.findByLabelText('Metric');
     expect(metricSelect).toBeInTheDocument();
+
     await select(metricSelect, 'Moon altitude', { container: document.body });
-    expect(onChange).toHaveBeenCalledWith({ ...props.query, target: 'moon_altitude' });
+    expect(onChange).toHaveBeenCalledWith({ ...props.query, target: ['sun_altitude', 'moon_altitude'] });
     expect(onRunQuery).toHaveBeenCalled();
 
     const latitudeInput = await screen.findByLabelText('Latitude');
@@ -46,5 +47,23 @@ describe('QueryEditor', () => {
     fireEvent.change(longitudeInput, { target: { value: '20' } });
     expect(onChange).toHaveBeenCalledWith({ ...props.query, longitude: '20' });
     expect(onRunQuery).toHaveBeenCalled();
+  });
+
+  it('should support legacy single element queries', async () => {
+    let legacyProps = { ...props };
+    legacyProps.query.target = "moon_distance";
+    render(<QueryEditor {...legacyProps} />);
+
+    await screen.findByText("Moon distance");
+  });
+
+  it('should support legacy annotation queries', async () => {
+    let legacyAnnotationProps = { ...props };
+    legacyAnnotationProps.query.target = undefined;
+    legacyAnnotationProps.query.query = "sunrise,sunset";
+    render(<QueryEditor {...legacyAnnotationProps} />);
+
+    await screen.findByText("Sunrise");
+    await screen.findByText("Sunset");
   });
 });

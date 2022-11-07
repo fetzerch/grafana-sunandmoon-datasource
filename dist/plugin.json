@@ -40,12 +40,12 @@
         "path": "img/screenshot.png"
       }
     ],
-    "version": "0.2.1",
-    "updated": "2022-11-05"
+    "version": "0.3.0",
+    "updated": "2022-11-10"
   },
   "dependencies": {
-    "grafanaDependency": ">=7.0.0",
-    "grafanaVersion": "7.0.0",
+    "grafanaDependency": ">=7.3.0",
+    "grafanaVersion": "7.3.0",
     "plugins": []
   }
 }

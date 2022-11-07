@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2022-11-07
+
+### Fixed
+
+- Noon and Midnight notifications did not show correct values for non default
+  timezones.
+- The 'Min interval' query option was not taken into account.
+
+### Added
+
+- Events / annotations can be queried as metrics. This allows to visualize for
+  example today's sunrise/sunset time on dashboards.
+- Dashboard options such as units are automatically set.
+
+### Changed
+
+- The annotations were migrated to the new react based plugin framework
+  introduced in Grafana 7.2 and the plugin is no longer compatible with older
+  versions of Grafana.
+- A single query now supports multiple metrics.
+
 ## [0.2.1] - 2020-11-27
 
 ### Added

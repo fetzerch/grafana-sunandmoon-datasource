@@ -3,27 +3,33 @@ import { DataQuery, DataSourceJsonData } from '@grafana/data';
 export const sunAndMoonMetrics: any = {
   moon_illumination: {
     title: 'Moon illumination',
-    text: 'Percentage of the moon illuminated by the sun',
+    text: 'Percentage of the moon illuminated by the sun (0.0 - 1.0)',
+    config: { unit: 'percentunit', decimals: 0 },
   },
   moon_altitude: {
     title: 'Moon altitude',
-    text: 'Height of the moon in the in degrees',
+    text: 'Height of the moon in degrees (-90 - 90)',
+    config: { unit: 'degree', min: 0 },
   },
   moon_azimuth: {
     title: 'Moon azimuth',
-    text: 'Direction of the moon along the horizon in degrees',
+    text: 'Direction of the moon along the horizon in degrees (0 - 360)',
+    config: { unit: 'degree' },
   },
   moon_distance: {
     title: 'Moon distance',
-    text: 'Distance to the moon in meter',
+    text: 'Distance to the moon in kilometers',
+    config: { unit: 'lengthkm', decimals: 0 },
   },
   sun_altitude: {
     title: 'Sun altitude',
-    text: 'Height of the sun in the in degrees',
+    text: 'Height of the sun in degrees (-90 - 90)',
+    config: { unit: 'degree', min: 0 },
   },
   sun_azimuth: {
     title: 'Sun azimuth',
-    text: 'Direction of the sun along the horizon in degrees',
+    text: 'Direction of the sun along the horizon in degrees (0 - 360)',
+    config: { unit: 'degree' },
   },
 };
 
@@ -60,7 +66,7 @@ export const sunAndMoonAnnotations: any = {
   },
   sunset: {
     title: 'Sunset',
-    text: 'Sun disappears below the horizon, ' + 'evening civil twilight starts',
+    text: 'Sun disappears below the horizon, evening civil twilight starts',
     tags: ['sun'],
   },
   dusk: {
@@ -121,18 +127,14 @@ export const sunAndMoonAnnotations: any = {
 };
 
 export interface SunAndMoonQuery extends DataQuery {
-  target?: string;
+  target?: string[];
   latitude?: string;
   longitude?: string;
 }
 
 export const sunAndMoonDefaultQuery: Partial<SunAndMoonQuery> = {
-  target: 'moon_illumination',
+  target: ['moon_illumination'],
 };
-
-export interface SunAndMoonAnnotationQuery extends DataQuery {
-  query?: string;
-}
 
 export interface SunAndMoonDataSourceOptions extends DataSourceJsonData {
   latitude?: number;
