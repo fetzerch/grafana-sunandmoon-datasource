@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/fetzerch/grafana-sunandmoon-datasource.svg?branch=master)](https://travis-ci.org/fetzerch/grafana-sunandmoon-datasource)
+[![Build Status](https://github.com/fetzerch/grafana-sunandmoon-datasource/actions/workflows/ci.yml/badge.svg)](https://github.com/fetzerch/grafana-sunandmoon-datasource/actions/workflows/ci.yml)
 [![Coverage Status](https://coveralls.io/repos/github/fetzerch/grafana-sunandmoon-datasource/badge.svg)](https://coveralls.io/github/fetzerch/grafana-sunandmoon-datasource)
 
 # Sun and Moon Datasource Plugin for Grafana
