@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.3.0] - 2022-11-07
+## [0.3.0] - 2022-11-11
 
 ### Fixed
 
@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Events / annotations can be queried as metrics. This allows to visualize for
-  example today's sunrise/sunset time on dashboards.
+  example today's sunrise/sunset time on dashboards. ([#20](https://github.com/fetzerch/grafana-sunandmoon-datasource/issues/20))
 - Dashboard options such as units are automatically set.
 
 ### Changed
@@ -103,6 +103,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial version with sun and moon calculation and annotations.
 
 [Unreleased]: https://github.com/fetzerch/grafana-sunandmoon-datasource/compare/v0.2.1...HEAD
+[0.3.0]: https://github.com/fetzerch/grafana-sunandmoon-datasource/compare/v0.2.1...v0.3.0
 [0.2.1]: https://github.com/fetzerch/grafana-sunandmoon-datasource/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/fetzerch/grafana-sunandmoon-datasource/compare/v0.1.6...v0.2.0
 [0.1.6]: https://github.com/fetzerch/grafana-sunandmoon-datasource/compare/v0.1.5...v0.1.6
