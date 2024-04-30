@@ -31,6 +31,11 @@ export const sunAndMoonMetrics: any = {
     text: 'Direction of the sun along the horizon in degrees (0 - 360)',
     config: { unit: 'degree' },
   },
+  sun_maximum_altitude: {
+    title: 'Maximum sun altitude of the day',
+    text: 'Maximum height of the sun of the day (at solar noon) in degrees (-90 - 90)',
+    config: { unit: 'degree', min: 0 },
+  },
 };
 
 export const sunAndMoonAnnotations: any = {

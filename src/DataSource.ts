@@ -94,6 +94,10 @@ export class SunAndMoonDataSource extends DataSourceApi<SunAndMoonQuery, SunAndM
               case 'sun_azimuth':
                 value = (SunCalc.getPosition(new Date(time), latitude!, longitude!).azimuth * 180) / Math.PI + 180;
                 break;
+              case 'sun_maximum_altitude':
+                let solar_noon = SunCalc.getTimes(new Date(time), latitude!, longitude!).solarNoon;
+                value = (SunCalc.getPosition(solar_noon, latitude!, longitude!).altitude * 180) / Math.PI;
+                break;
             }
             if (value !== undefined) {
               frame.add({ Time: time, Value: value });
