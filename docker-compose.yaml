@@ -1,6 +1,6 @@
 services:
   grafana:
-    user: root
+    user: "${UID:-root}:${GID:-root}"
     container_name: 'fetzerch-sunandmoon-datasource'
 
     platform: 'linux/amd64'
@@ -8,7 +8,7 @@ services:
       context: ./.config
       args:
         grafana_image: ${GRAFANA_IMAGE:-grafana-enterprise}
-        grafana_version: ${GRAFANA_VERSION:-10.3.3}
+        grafana_version: ${GRAFANA_VERSION:-11.0.0}
         development: ${DEVELOPMENT:-false}
     ports:
       - 3000:3000/tcp
@@ -16,6 +16,8 @@ services:
       - ./dist:/var/lib/grafana/plugins/fetzerch-sunandmoon-datasource
       - ./provisioning:/etc/grafana/provisioning
       - .:/root/fetzerch-sunandmoon-datasource
+      # Persist Grafana settings.
+      #- ./data:/var/lib/grafana
 
     environment:
       NODE_ENV: development

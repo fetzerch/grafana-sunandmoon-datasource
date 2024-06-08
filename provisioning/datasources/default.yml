@@ -1,0 +1,9 @@
+apiVersion: 1
+
+datasources:
+ - name: sunandmoon
+   type: fetzerch-sunandmoon-datasource
+   jsonData:
+     latitude: 48.0
+     longitude: 10.0
+   editable: true
