@@ -1,6 +1,7 @@
 import * as SunCalc from 'suncalc';
 
 import {
+  CoreApp,
   DataQueryRequest,
   DataQueryResponse,
   DataSourceApi,
@@ -16,6 +17,7 @@ import { getTemplateSrv } from '@grafana/runtime';
 import {
   SunAndMoonQuery,
   SunAndMoonDataSourceOptions,
+  sunAndMoonDefaultQuery,
   sunAndMoonMetrics,
   sunAndMoonAnnotations,
 } from './types';
@@ -33,6 +35,10 @@ export class SunAndMoonDataSource extends DataSourceApi<SunAndMoonQuery, SunAndM
     this.latitude = instanceSettings.jsonData.latitude;
     this.longitude = instanceSettings.jsonData.longitude;
     this.annotations = {}
+  }
+
+  getDefaultQuery?(app: CoreApp): Partial<SunAndMoonQuery> {
+    return sunAndMoonDefaultQuery;
   }
 
   async query(options: DataQueryRequest<SunAndMoonQuery>): Promise<DataQueryResponse> {
