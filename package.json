@@ -1,7 +1,7 @@
 {
   "name": "sunandmoon-datasource",
   "private": true,
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Calculates position of Sun and Moon.",
   "scripts": {
     "build": "webpack -c ./.config/webpack/webpack.config.ts --env production",
