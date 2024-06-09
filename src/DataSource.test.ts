@@ -27,6 +27,11 @@ describe('SunAndMoonDatasource', () => {
     datasource = new SunAndMoonDataSource(config);
   });
 
+  it('getDefaultQuery should return a default', () => {
+    const app: any = {};
+    expect(datasource.getDefaultQuery!(app).target!).toHaveLength(1);
+  });
+
   it('query should return an empty array when no targets are set', () => {
     const options: any = {
       targets: [],

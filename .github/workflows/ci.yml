@@ -109,6 +109,11 @@ jobs:
           path: ${{ steps.metadata.outputs.plugin-id }}
           retention-days: 5
 
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
   resolve-versions:
     name: Resolve e2e images
     runs-on: ubuntu-latest
