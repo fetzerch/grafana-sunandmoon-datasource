@@ -9,11 +9,11 @@
     "lint": "eslint --cache --ignore-path ./.gitignore --ext .js,.jsx,.ts,.tsx .",
     "lint:fix": "npm run lint -- --fix",
     "markdownlint": "markdownlint *.md dev-env/*.md",
-    "server": "docker-compose up --build",
+    "server": "docker compose up --build",
     "sign": "npx --yes @grafana/sign-plugin@latest",
     "start": "yarn watch",
     "test": "jest --watch --onlyChanged",
-    "test:ci": "jest --passWithNoTests --maxWorkers 4",
+    "test:ci": "jest --passWithNoTests --maxWorkers 4 --coverage",
     "typecheck": "tsc --noEmit"
   },
   "repository": {
