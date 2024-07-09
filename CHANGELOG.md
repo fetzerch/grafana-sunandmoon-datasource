@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.3] - 2024-07-09
+
+### Fixed
+
+- Prepare for compatibility with Grafana 12.0.
+
 ## [0.3.2] - 2024-06-09
 
 ### Added
@@ -114,7 +120,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial version with sun and moon calculation and annotations.
 
-[Unreleased]: https://github.com/fetzerch/grafana-sunandmoon-datasource/compare/v0.3.2...HEAD
+[Unreleased]: https://github.com/fetzerch/grafana-sunandmoon-datasource/compare/v0.3.3...HEAD
+[0.3.3]: https://github.com/fetzerch/grafana-sunandmoon-datasource/compare/v0.3.1...v0.3.3
 [0.3.2]: https://github.com/fetzerch/grafana-sunandmoon-datasource/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/fetzerch/grafana-sunandmoon-datasource/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/fetzerch/grafana-sunandmoon-datasource/compare/v0.2.1...v0.3.0
