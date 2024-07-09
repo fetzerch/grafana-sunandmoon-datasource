@@ -1,5 +1,5 @@
 import React, { ChangeEvent, PureComponent } from 'react';
-import { InlineField, Input } from '@grafana/ui';
+import { Alert, InlineField, Input } from '@grafana/ui';
 import { DataSourcePluginOptionsEditorProps } from '@grafana/data';
 import { SunAndMoonDataSourceOptions } from './types';
 
@@ -57,11 +57,11 @@ export class ConfigEditor extends PureComponent<Props> {
     return (
       <div className="gf-form-group">
         <h3 className="page-heading">Sun and Moon reference location</h3>
-        <div className="grafana-info-box">
+        <Alert severity="info" title="">
           This datasource calculates sun and moon metrics that are relative to a location on earth.
           <br />
           The geographic position is expressed as latitude and longitude in decimal degrees.
-        </div>
+        </Alert>
         <div className="gf-form">
           <InlineField label="Latitude" labelWidth={14}>
             <Input
